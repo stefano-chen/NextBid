@@ -21,8 +21,7 @@ const MONGO_URI = process.env.MONGO_URI;
 const store = new MongoDBStore(
     {
         uri: MONGO_URI,
-        collection: "sessions",
-        expires: 1000 * 60 * 60 * 24 * 7
+        collection: "sessions"
     },
     (error) => {
         if (error) {
@@ -42,11 +41,11 @@ app.use(
         saveUninitialized: false,
         resave: false,
         name: "nextbid.sid",
-        rolling: true,
+        rolling: false,
         store: store,
         cookie: {
             secure: false,
-            maxAge: 1000 * 60 * 60 * 24 * 7,
+            maxAge: 1000 * 60 * 60 * 24 * 30,
         },
     })
 );
