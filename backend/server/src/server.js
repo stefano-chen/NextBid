@@ -3,11 +3,11 @@ require("dotenv").config({ path: `${__dirname}/../.env` });
 
 const express = require("express");
 const mongoose = require("mongoose");
-const authRoutes = require("./routes/auth");
-const usersRoutes = require("./routes/users");
-const auctionsRoutes = require("./routes/auctions");
-const bidsRoutes = require("./routes/bids");
-const whoamiRoutes = require("./routes/whoami");
+const authRoutes = require("./routes/authRoutes");
+const usersRoutes = require("./routes/usersRoutes");
+const auctionsRoutes = require("./routes/auctionsRoutes");
+const bidsRoutes = require("./routes/bidsRoutes");
+const whoamiRoutes = require("./routes/whoamiRuotes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
