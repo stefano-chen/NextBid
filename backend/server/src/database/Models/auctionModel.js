@@ -18,6 +18,10 @@ const auctionSchema = new mongoose.Schema({
         required: true,
         min: 0,
     },
+    bids:{
+        type: [mongoose.Schema.ObjectId],
+        default: []
+    },
     owner:{
         type: mongoose.Schema.ObjectId,
         required: true
@@ -26,6 +30,6 @@ const auctionSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         default: null
     },
-});
+}, {timestamps: true});
 
 module.exports = mongoose.model("Auction", auctionSchema);
