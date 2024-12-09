@@ -1,5 +1,5 @@
 const express = require("express");
-const whoamiHandler = require("../handlers/whoamiHandler")
+const whoamiHandler = require("../handlers/whoamiHandler");
 
 const router = express.Router();
 

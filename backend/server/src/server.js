@@ -21,7 +21,8 @@ const MONGO_URI = process.env.MONGO_URI;
 const store = new MongoDBStore(
     {
         uri: MONGO_URI,
-        collection: "Sessions",
+        collection: "sessions",
+        expires: 1000 * 60 * 60 * 24 * 7
     },
     (error) => {
         if (error) {
@@ -45,7 +46,7 @@ app.use(
         store: store,
         cookie: {
             secure: false,
-            maxAge: 1000 * 60 * 60 * 24 * 14,
+            maxAge: 1000 * 60 * 60 * 24 * 7,
         },
     })
 );

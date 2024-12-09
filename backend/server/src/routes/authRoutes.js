@@ -1,5 +1,6 @@
 const express = require("express");
 const signUpHandler = require("../handlers/signupHandler");
+const signInHandler = require("../handlers/signinHandler");
 
 const router = express.Router();
 
@@ -7,8 +8,6 @@ const router = express.Router();
 router.post("/signup", signUpHandler);
 
 // Login
-router.post("/signin", (req, res) => {
-    res.send("signin");
-});
+router.post("/signin", signInHandler);
 
 module.exports = router;
