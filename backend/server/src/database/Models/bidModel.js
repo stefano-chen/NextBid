@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const bidSchema = new mongoose.Schema({ 
-    userId: {
+    user: {
         type: mongoose.Schema.ObjectId,
         required: true
     },
-    auctionId: {
+    auction: {
         type: mongoose.Schema.ObjectId,
         required: true
     },
