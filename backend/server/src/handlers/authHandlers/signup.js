@@ -1,4 +1,4 @@
-const User = require("../database/Models/userModel");
+const User = require("../../database/Models/userModel");
 const bcrypt = require("bcrypt");
 const { isStrongPassword } = require("validator");
 

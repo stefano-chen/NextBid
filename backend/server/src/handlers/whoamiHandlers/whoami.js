@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose");
-const User = require("../database/Models/userModel");
+const User = require("../../database/Models/userModel");
 
 const whoamiHandler = async (req, res) => {
     if (!req.session.uid) {

@@ -1,6 +1,6 @@
 const express = require("express");
-const signUpHandler = require("../handlers/signupHandler");
-const signInHandler = require("../handlers/signinHandler");
+const signUpHandler = require("../handlers/authHandlers/signup");
+const signInHandler = require("../handlers/authHandlers/signin");
 
 const router = express.Router();
 
