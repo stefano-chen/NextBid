@@ -2,7 +2,7 @@ const User = require("../../database/Models/userModel");
 const bcrypt = require("bcrypt");
 const { isStrongPassword } = require("validator");
 
-const signUpHandler = async (req, res) => {
+const signUp = async (req, res) => {
     const userData = req.body;
 
     try {
@@ -25,4 +25,4 @@ const signUpHandler = async (req, res) => {
     }
 };
 
-module.exports = signUpHandler;
+module.exports = signUp;

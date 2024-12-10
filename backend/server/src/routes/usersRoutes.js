@@ -1,15 +1,15 @@
 const express = require("express");
 
+const getUserHandler = require("../handlers/usersHandlers/getUser");
+const searchUsersHandler = require("../handlers/usersHandlers/searchUsers");
+
+
 const router = express.Router();
 
 // List of all users with a filtering query
-router.get("/", (req, res) => {
-    res.send(req.query);
-});
+router.get("/", searchUsersHandler);
 
 // User info based on an id
-router.get("/:id", (req, res) => {
-    res.send(req.params.id);
-});
+router.get("/:id", getUserHandler);
 
 module.exports = router;

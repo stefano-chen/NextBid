@@ -1,7 +1,7 @@
 const User = require("../../database/Models/userModel");
 const bcrypt = require("bcrypt");
 
-const signInHandler = async (req, res) => {
+const signIn = async (req, res) => {
     const userData = req.body;
     try {
         const user = await User.findOne({username: userData.username});
@@ -19,4 +19,4 @@ const signInHandler = async (req, res) => {
     }
 }
 
-module.exports = signInHandler;
+module.exports = signIn;

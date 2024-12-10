@@ -1,7 +1,6 @@
-const { default: mongoose } = require("mongoose");
 const User = require("../../database/Models/userModel");
 
-const whoamiHandler = async (req, res) => {
+const whoami = async (req, res) => {
     if (!req.session.uid) {
         res.status(401).send({ error: "Not authenticated" });
         return;
@@ -13,4 +12,4 @@ const whoamiHandler = async (req, res) => {
     res.status(200).send(user);
 };
 
-module.exports = whoamiHandler;
+module.exports = whoami;
