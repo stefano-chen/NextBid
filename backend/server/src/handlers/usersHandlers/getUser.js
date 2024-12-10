@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+const {isValidObjectId} = require("mongoose");
 const User = require("../../database/Models/userModel");
 
 const getUser = async (req, res) => {
     try {
         const id = req.params.id;
-        if (!mongoose.isValidObjectId(id))
+        if (!isValidObjectId(id))
             throw new Error("Invalid id");
         const user = await User.findById(id, "username name surname");
         if (!user)
