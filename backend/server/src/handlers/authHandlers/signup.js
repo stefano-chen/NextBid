@@ -17,7 +17,8 @@ const signUp = async (req, res) => {
 
         const hash = await bcrypt.hash(userData.password, 10);
         userData.password = hash;
-        const user = await User.create(userData);
+        const {username, name, surname, _id} = await User.create(userData);
+        const user = {_id, username, name, surname};
         req.session.uid = user._id;
         res.status(200).send(user);
     } catch (error) {
