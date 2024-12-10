@@ -1,13 +1,13 @@
 const express = require("express");
-const signUpHandler = require("../handlers/authHandlers/signup");
-const signInHandler = require("../handlers/authHandlers/signin");
+const signUp = require("../handlers/authHandlers/signup");
+const signIn = require("../handlers/authHandlers/signin");
 
 const router = express.Router();
 
 // Create a new User
-router.post("/signup", signUpHandler);
+router.post("/signup", signUp);
 
 // Login
-router.post("/signin", signInHandler);
+router.post("/signin", signIn);
 
 module.exports = router;
