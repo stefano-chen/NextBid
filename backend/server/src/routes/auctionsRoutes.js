@@ -18,12 +18,12 @@ router.get("/:id", (req, res) => {
 });
 
 // Modify info about an Auction identified by a given id, it requires authentication
-router.put("/:id", (req, res) => {
+router.put("/:id", authCheck, (req, res) => {
     res.send(req.params.id);
 });
 
 // Delete an Auction identified by a given id, it requires authentication
-router.delete("/:id", (req, res) => {
+router.delete("/:id", authCheck, (req, res) => {
     res.send(req.params.id);
 });
 
@@ -33,7 +33,7 @@ router.get("/:id/bids", (req, res) => {
 });
 
 // Create a new bid for an Auction identified by a given id, it requires authentication
-router.post("/:id/bids", (req, res) => {
+router.post("/:id/bids", authCheck, (req, res) => {
     res.send(req.params.id);
 });
 
