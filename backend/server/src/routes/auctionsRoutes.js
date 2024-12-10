@@ -1,5 +1,6 @@
 const express = require("express");
-const authCheck = require("../handlers/authHandlers/authCheck")
+const authCheck = require("../handlers/authHandlers/authCheck");
+const createAuction = require("../handlers/auctionsHandlers/createAuction");
 
 const router = express.Router();
 
@@ -9,9 +10,7 @@ router.get("/", (req, res) => {
 });
 
 // Create a new Auction for the authenticated user
-router.post("/", authCheck, (req, res) => {
-    res.send("New Auction");
-});
+router.post("/", authCheck, createAuction);
 
 // Info about an Auction given an id
 router.get("/:id", (req, res) => {

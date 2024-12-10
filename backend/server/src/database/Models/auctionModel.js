@@ -12,8 +12,9 @@ const auctionSchema = new mongoose.Schema({
     dueDate: {
         type: Date,
         required: true,
+        min: new Date()
     },
-    initalBid: {
+    initialBid: {
         type: Number,
         required: true,
         min: 0,
