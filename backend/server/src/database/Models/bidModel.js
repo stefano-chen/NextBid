@@ -5,6 +5,10 @@ const bidSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         required: true
     },
+    auctionId: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
     value: {
         type: Number,
         required: true,
