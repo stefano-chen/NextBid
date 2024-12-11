@@ -1,8 +1,8 @@
 const express = require("express");
 
+// Request Handlers
 const getUser = require("../handlers/usersHandlers/getUser");
 const searchUsers = require("../handlers/usersHandlers/searchUsers");
-
 
 const router = express.Router();
 

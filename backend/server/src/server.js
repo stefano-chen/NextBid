@@ -1,11 +1,17 @@
 // Importing the environment variable from a .env file
+// The .env file is a local file not tracker by git/github
 require("dotenv").config({ path: `${__dirname}/../.env` });
 
 const express = require("express");
 const session = require("express-session");
+
+// A Session Store that uses MongoDB to store the sessions data
 const MongoDBStore = require("connect-mongodb-session")(session);
+
+// Object Data Modelling (ODM) for MongoDB
 const mongoose = require("mongoose");
 
+// Custom routes
 const authRoutes = require("./routes/authRoutes");
 const usersRoutes = require("./routes/usersRoutes");
 const auctionsRoutes = require("./routes/auctionsRoutes");
@@ -15,13 +21,15 @@ const whoamiRoutes = require("./routes/whoamiRuotes");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
+
+// Contains the connection string for MongoDB
 const MONGO_URI = process.env.MONGO_URI;
 
 // Use MongoDB to store session data, allowing persistence between restarts
 const store = new MongoDBStore(
     {
         uri: MONGO_URI,
-        collection: "sessions"
+        collection: "sessions",
     },
     (error) => {
         if (error) {
@@ -35,6 +43,7 @@ store.on("error", (error) => {
     console.log(error);
 });
 
+// Setup the Server Session, used to manage user's authentication
 app.use(
     session({
         secret: process.env.SESSION_SECRET,
@@ -44,7 +53,9 @@ app.use(
         rolling: false,
         store: store,
         cookie: {
+            // If secure set to true: the client browser will send the session cookie only when using a HTTPS connection
             secure: false,
+            // Each session has a duration of 30 days
             maxAge: 1000 * 60 * 60 * 24 * 30,
         },
     })
@@ -52,14 +63,19 @@ app.use(
 
 app.use(express.json());
 
+// Endpoint to manage authentication
 app.use("/api/auth", authRoutes);
 
+// Endpoint to manage the users data
 app.use("/api/users", usersRoutes);
 
+// Endpoint to manage the auctions data
 app.use("/api/auctions", auctionsRoutes);
 
+// Endpoint to manage the bids data
 app.use("/api/bids", bidsRoutes);
 
+// Endpoit to get info about the logged user
 app.use("/api/whoami", whoamiRoutes);
 
 // Listen to HTTP request only if successfully connected to MongoDB

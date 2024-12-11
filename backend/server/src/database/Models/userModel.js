@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+// A schema defined the document's structure
+// By default Mongoose adds an implicit _id field
+// In Mongoose the creation/modification of an document triggers a validation based on this schema
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -20,4 +23,5 @@ const userSchema = new mongoose.Schema({
     },
 });
 
+// In Mongoose a Model represents a collection
 module.exports = mongoose.model("User", userSchema);

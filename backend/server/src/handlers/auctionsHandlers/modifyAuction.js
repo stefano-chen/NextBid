@@ -1,25 +1,33 @@
 const { isValidObjectId } = require("mongoose");
 const { isEmpty } = require("validator");
+
 const Auction = require("../../database/Models/auctionModel");
 
 const modifyAuction = async (req, res) => {
     try {
         const id = req.params.id;
+
+        // Allows only to modify title and description
         const { title, description } = req.body;
+
         if (!isValidObjectId(id)) throw new Error("Invalid id");
+
         let auction = await Auction.findById(id);
         if (!auction) throw new Error("Auction not Found");
+
+        // Only the auction's owner can modify the auction
         if (req.session.uid !== auction.owner.toString())
             throw new Error("Owner mismatch");
 
-        if (title && !isEmpty(title, { ignore_whitespace: true })) {
+        if (title && !isEmpty(title, { ignore_whitespace: true }))
+            // .trim removes the whitespaces at the begin and at the end of the string
             auction.title = title.trim();
-        }
 
-        if (description && !isEmpty(description, { ignore_whitespace: true })) {
+        if (description && !isEmpty(description, { ignore_whitespace: true }))
+            // .trim removes the whitespaces at the begin and at the end of the string
             auction.description = description.trim();
-        }
 
+        // Validates only the modified fields
         auction = await auction.save({ validateModifiedOnly: true });
         res.status(200).send(auction);
     } catch (error) {

@@ -1,5 +1,6 @@
 const express = require("express");
 
+// Request Handlers
 const authCheck = require("../handlers/authHandlers/authCheck");
 const createAuction = require("../handlers/auctionsHandlers/createAuction");
 const searchAuction = require("../handlers/auctionsHandlers/searchAuctions");
