@@ -3,9 +3,10 @@ const bcrypt = require("bcrypt");
 const { isStrongPassword } = require("validator");
 
 const signUp = async (req, res) => {
-    const userData = req.body;
-
     try {
+        if (req.session.uid) throw new Error("Please Logout before SignUp");
+
+        const userData = req.body;
         const result = await User.findOne({ username: userData.username });
 
         if (result) throw new Error("Username Already Taken");
@@ -17,8 +18,8 @@ const signUp = async (req, res) => {
 
         const hash = await bcrypt.hash(userData.password, 10);
         userData.password = hash;
-        const {username, name, surname, _id} = await User.create(userData);
-        const user = {_id, username, name, surname};
+        const { username, name, surname, _id } = await User.create(userData);
+        const user = { _id, username, name, surname };
         req.session.uid = user._id.toString();
         res.status(200).send(user);
     } catch (error) {

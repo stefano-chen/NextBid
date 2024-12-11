@@ -5,6 +5,7 @@ const createAuction = require("../handlers/auctionsHandlers/createAuction");
 const searchAuction = require("../handlers/auctionsHandlers/searchAuctions");
 const getAuction = require("../handlers/auctionsHandlers/getAuction");
 const modifyAuction = require("../handlers/auctionsHandlers/modifyAuction");
+const deleteAuction = require("../handlers/auctionsHandlers/deleteAuction");
 
 const router = express.Router();
 
@@ -21,9 +22,7 @@ router.get("/:id", getAuction);
 router.put("/:id", authCheck, modifyAuction);
 
 // Delete an Auction identified by a given id, it requires authentication
-router.delete("/:id", authCheck, (req, res) => {
-    res.send(req.params.id);
-});
+router.delete("/:id", authCheck, deleteAuction);
 
 // List of all bids for an Auction identified by a given id
 router.get("/:id/bids", (req, res) => {

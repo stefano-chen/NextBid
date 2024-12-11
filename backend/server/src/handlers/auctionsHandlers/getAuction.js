@@ -7,7 +7,10 @@ const getAuction = async (req, res) => {
     try {
         const id = req.params.id;
         if (!isValidObjectId(id)) throw new Error("Invalid id");
-        let auction = (await Auction.findById(id)).toObject();
+        let auction = await Auction.findById(id)
+        if (!auction)
+            throw new Error("Auction not Found");
+        auction = auction.toObject();
         auction.bids = await Bid.aggregate(auctionBidsPipeline(id))
         if (!auction) throw new Error("Auction not Found");
         res.status(200).send(auction);
