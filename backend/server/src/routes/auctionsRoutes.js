@@ -1,8 +1,10 @@
 const express = require("express");
+
 const authCheck = require("../handlers/authHandlers/authCheck");
 const createAuction = require("../handlers/auctionsHandlers/createAuction");
 const searchAuction = require("../handlers/auctionsHandlers/searchAuctions");
 const getAuction = require("../handlers/auctionsHandlers/getAuction");
+const modifyAuction = require("../handlers/auctionsHandlers/modifyAuction");
 
 const router = express.Router();
 
@@ -16,9 +18,7 @@ router.post("/", authCheck, createAuction);
 router.get("/:id", getAuction);
 
 // Modify info about an Auction identified by a given id, it requires authentication
-router.put("/:id", authCheck, (req, res) => {
-    res.send(req.params.id);
-});
+router.put("/:id", authCheck, modifyAuction);
 
 // Delete an Auction identified by a given id, it requires authentication
 router.delete("/:id", authCheck, (req, res) => {

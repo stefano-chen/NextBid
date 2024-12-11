@@ -12,7 +12,7 @@ const signIn = async (req, res) => {
         if (!match) {
             throw new Error();
         }
-        req.session.uid = user._id;
+        req.session.uid = user._id.toString();
         res.status(200).send({msg: "Login successful"});
     } catch (error) {
         res.status(401).send({error: "Invalid Credentials"});

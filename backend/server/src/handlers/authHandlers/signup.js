@@ -19,7 +19,7 @@ const signUp = async (req, res) => {
         userData.password = hash;
         const {username, name, surname, _id} = await User.create(userData);
         const user = {_id, username, name, surname};
-        req.session.uid = user._id;
+        req.session.uid = user._id.toString();
         res.status(200).send(user);
     } catch (error) {
         res.status(400).send({ error: error.message });
