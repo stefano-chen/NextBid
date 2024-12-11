@@ -14,6 +14,7 @@ const auctionSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        // A date is represented using the format mm-dd-yyyy
         dueDate: {
             type: Date,
             required: true,
