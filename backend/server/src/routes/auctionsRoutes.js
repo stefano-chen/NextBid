@@ -1,21 +1,19 @@
 const express = require("express");
 const authCheck = require("../handlers/authHandlers/authCheck");
 const createAuction = require("../handlers/auctionsHandlers/createAuction");
+const searchAuction = require("../handlers/auctionsHandlers/searchAuctions");
+const getAuction = require("../handlers/auctionsHandlers/getAuction");
 
 const router = express.Router();
 
 // List all Auctions filtering by a given query
-router.get("/", (req, res) => {
-    res.send(req.query);
-});
+router.get("/", searchAuction);
 
 // Create a new Auction for the authenticated user
 router.post("/", authCheck, createAuction);
 
 // Info about an Auction given an id
-router.get("/:id", (req, res) => {
-    res.send(req.params.id);
-});
+router.get("/:id", getAuction);
 
 // Modify info about an Auction identified by a given id, it requires authentication
 router.put("/:id", authCheck, (req, res) => {
