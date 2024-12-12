@@ -6,7 +6,7 @@ const { Types } = require("mongoose");
 const pipeline = (id) => [
     // outputs all documents with the given id
     {
-        $match: { _id: new Types.ObjectId(`${id}`) },
+        $match: { _id: new Types.ObjectId(`${id}`) }
     },
     // Generate an join between the users collection and the collection that uses this pipeline (Bid in this case)
     {
