@@ -1,5 +1,6 @@
 const Auction = require("../../database/Models/auctionModel");
 
+// Create an auction where the owner is the current logged in user
 const createAuction = async (req, res) => {
     try {
         const auctionData = req.body;

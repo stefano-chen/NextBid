@@ -1,4 +1,4 @@
-const { isValidObjectId, Types } = require("mongoose");
+const { isValidObjectId} = require("mongoose");
 
 const Auction = require("../../database/Models/auctionModel");
 
@@ -7,6 +7,7 @@ const Auction = require("../../database/Models/auctionModel");
 // applies some transformation, then pass the transformed document to the next stage
 const auctionOwnerPipeline = require("../../database/Pipelines/auctionOwnerPipeline");
 
+// returns the auction detail, identified by an id
 const getAuction = async (req, res) => {
     try {
         const id = req.params.id;
@@ -16,7 +17,8 @@ const getAuction = async (req, res) => {
         let auction = await Auction.findById(id);
         if (!auction) throw new Error("Auction not Found");
 
-        auction = await Auction.aggregate(auctionOwnerPipeline(id));
+        // apply a join between the auctions and the users collections
+        [auction] = await Auction.aggregate(auctionOwnerPipeline(id));
 
         res.status(200).send(auction);
     } catch (error) {

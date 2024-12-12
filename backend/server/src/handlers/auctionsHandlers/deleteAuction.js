@@ -3,6 +3,10 @@ const { isValidObjectId, Types } = require("mongoose");
 const Auction = require("../../database/Models/auctionModel");
 const Bid = require("../../database/Models/bidModel");
 
+// Delete an auction, identified by an id
+// Only the auction's owner can delete it
+// Once an auction is deleted, all associated bids are deleted as well
+// Returns the number of deleted documents in the auctions and bids collections
 const deleteAuction = async (req, res) => {
     try {
         const uid = req.session.uid;

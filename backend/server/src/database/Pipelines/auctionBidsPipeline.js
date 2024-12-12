@@ -8,7 +8,7 @@ const pipeline = (id) => [
     {
         $match: { auction: new Types.ObjectId(`${id}`) },
     },
-    // Generate an join between the users collection and the collection that uses this pipeline (Bid in this case)
+    // Generate an join between the users collection and the collection that uses this pipeline (Bids in this case)
     {
         $lookup: {
             from: "users",

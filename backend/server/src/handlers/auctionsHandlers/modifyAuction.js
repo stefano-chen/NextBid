@@ -3,6 +3,9 @@ const { isEmpty } = require("validator");
 
 const Auction = require("../../database/Models/auctionModel");
 
+// Modify some info about an auction, identified by an id
+// Only the auction's owner can modify
+// At the moment only the title and description are modifiable
 const modifyAuction = async (req, res) => {
     try {
         const id = req.params.id;

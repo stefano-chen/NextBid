@@ -3,19 +3,21 @@ const { isStrongPassword } = require("validator");
 
 const User = require("../../database/Models/userModel");
 
+// Create a new user
 const signUp = async (req, res) => {
     try {
+        // Cannot signup if already logged in
         if (req.session.uid) throw new Error("Please Logout before SignUp");
 
         const userData = req.body;
-        const result = await User.findOne({ username: userData.username });
 
+        // Check if the username is already taken
+        const result = await User.findOne({ username: userData.username });
         if (result) throw new Error("Username Already Taken");
 
         // By default a password is strong if { minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1}
-        if (!isStrongPassword(userData.password, { minSymbols: 0 })) {
+        if (!isStrongPassword(userData.password, { minSymbols: 0 }))
             throw new Error("Weak Password");
-        }
 
         // the .hash method requires an string (in this case the user's password)
         // and a number indicating the saltRounds used to salt and hash the password

@@ -6,6 +6,7 @@ const authCheck = (req, res, next) => {
         return;
     }
 
+    // Calls the next middleware
     next();
 };
 

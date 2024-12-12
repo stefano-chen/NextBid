@@ -1,3 +1,4 @@
+// Log out the user by destroy the session
 const logout = (req, res) => {
     // Removes the client cookie and deletes the session data stored in the Session store.
     req.session.destroy();

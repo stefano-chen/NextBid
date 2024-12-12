@@ -7,14 +7,14 @@ const Bid = require("../../database/Models/bidModel");
 // applies some transformation, then pass the transformed document to the next stage
 const bidInfoPipeline = require("../../database/Pipelines/bidInfoPipeline");
 
-// TODO: implement the lookup for the auctions collection.
-
+// returns the info about a bid, identified by a given id
 const getBid = async (req, res) => {
     try {
         const id = req.params.id;
 
         if (!isValidObjectId(id)) throw new Error("Invalid id");
 
+        // Apply an join between the bids and users collections
         const [bid] = await Bid.aggregate(bidInfoPipeline(id));
         if (!bid) throw new Error("Bid not Found");
 

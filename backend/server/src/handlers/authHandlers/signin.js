@@ -2,12 +2,16 @@ const bcrypt = require("bcrypt");
 
 const User = require("../../database/Models/userModel");
 
+// SignIn based on username and password
+// Note: the username is key sensitive
 const signIn = async (req, res) => {
     try {
+        // Cannot signin if already logged in
         if (req.session.uid) throw new Error("Please Logout before SignIn");
 
         const userData = req.body;
 
+        // Returns the user by the given username
         const user = await User.findOne({ username: userData.username });
         if (!user) throw new Error("Invalid Credentials");
 
