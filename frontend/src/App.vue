@@ -3,6 +3,6 @@
 </script>
 
 <template>
-  <img src="@/assets/images/logo.png">
+  <img class="w-64 h-64" src="@/assets/images/logo.png">
 </template>
 
