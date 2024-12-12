@@ -43,7 +43,7 @@ store.on("error", (error) => {
     console.log(error);
 });
 
-// Setup the Server Session, used to manage user's authentication
+// Set up the Server Session, used to manage user's authentication
 app.use(
     session({
         secret: process.env.SESSION_SECRET,
@@ -75,7 +75,7 @@ app.use("/api/auctions", auctionsRoutes);
 // Endpoint to manage the bids data
 app.use("/api/bids", bidsRoutes);
 
-// Endpoit to get info about the logged user
+// Endpoint to get info about the logged user
 app.use("/api/whoami", whoamiRoutes);
 
 // Listen to HTTP request only if successfully connected to MongoDB
