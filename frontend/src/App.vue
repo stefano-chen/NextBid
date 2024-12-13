@@ -1,8 +1,9 @@
 <script setup>
-
+import NavBar from "./components/NavBar.vue";
+import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <img class="w-64 h-64" src="@/assets/images/logo.png">
+  <NavBar />
+  <RouterView />
 </template>
-
