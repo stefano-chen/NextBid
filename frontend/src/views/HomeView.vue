@@ -1,7 +1,7 @@
 <script setup>
-import Hero from "@/components/HeroSection.vue";
+import HeroSection from '@/components/HeroSection.vue'
 </script>
 
 <template>
-  <Hero />
+  <HeroSection />
 </template>

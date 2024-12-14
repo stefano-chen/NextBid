@@ -1,17 +1,17 @@
 <script setup>
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router'
 
-const router = useRouter();
+const router = useRouter()
 
 const goHome = () => {
-  router.push("/");
+  router.push('/')
 }
 </script>
 
 <template>
-  <nav class="sticky top-0 w-screen p-6 bg-slate-800 h-24">
+  <nav class="sticky top-0 h-24 w-screen bg-slate-800 p-6">
     <div class="flex flex-row justify-between">
-      <div class="w-fit flex flex-row gap-4 hover:cursor-pointer items-center" @click="goHome">
+      <div class="flex w-fit flex-row items-center gap-4 hover:cursor-pointer" @click="goHome">
         <img class="w-10" src="@/assets/images/logo.png" />
         <h1>NextBid</h1>
       </div>
