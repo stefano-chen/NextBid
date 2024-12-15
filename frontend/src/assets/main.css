@@ -6,13 +6,21 @@
   html {
     font-family: 'Roboto', system-ui, sans-serif;
   }
+
   body {
-    @apply overflow-scroll bg-glaucous text-gray-200;
+    @apply scrollbar-hidden overflow-scroll bg-glaucous text-gray-200;
   }
   h1 {
     @apply text-3xl;
   }
   p {
     @apply text-xl;
+  }
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
   }
 }

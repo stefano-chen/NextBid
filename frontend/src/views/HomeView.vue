@@ -1,35 +1,34 @@
 <script setup>
 import CardGroup from '@/components/CardGroup.vue'
-import ErrorMessage from '@/components/ErrorMessage.vue'
 import HeroSection from '@/components/HeroSection.vue'
-import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
 
 let auctions = ref([])
-let isLoarding = ref(true)
-let loardingError = ref(false)
+let isLoading = ref(true)
+let loadingError = ref(false)
 
 onMounted(async () => {
   try {
-    const response = await axios.get('/api/auctions/')
-    if (response.status === 200) auctions.value = (await response.data).slice(0, 8)
+    // await new Promise((r) => setTimeout(r, 2000)) // Delete for production
+    const response = await axios.get('/api/auctions/?limit=8')
+    if (response.status === 200) auctions.value = await response.data
   } catch {
-    loardingError.value = true
+    loadingError.value = true
   } finally {
-    isLoarding.value = false
+    isLoading.value = false
   }
 })
 </script>
 
 <template>
   <HeroSection />
-  <LoadingSpinner v-if="isLoarding" />
+
   <CardGroup
-    v-else-if="!loardingError"
+    :loading-error="loadingError"
+    :loading="isLoading"
     :auctions="auctions"
     title="Recently Added"
-    viewMore="true"
+    view-more="true"
   />
-  <ErrorMessage v-else> Server Error Cannot Fetch Data</ErrorMessage>
 </template>

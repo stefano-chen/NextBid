@@ -12,7 +12,7 @@ if (description && description.length > maxCharDescription)
   description = description.slice(0, maxCharDescription - 1) + '...'
 const auctionId = props.auction._id
 const initialBid = props.auction.initialBid?.toFixed(2)
-const dueDate = format(props.auction.dueDate, 'dd-MM-yyyy hh:mm')
+const dueDate = format(props.auction.dueDate, 'dd-MM-yyyy HH:mm')
 </script>
 
 <template>
