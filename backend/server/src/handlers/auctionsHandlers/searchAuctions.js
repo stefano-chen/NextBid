@@ -5,12 +5,23 @@ const Auction = require("../../database/Models/auctionModel");
 // returns an array of auctions that matches the http query
 const searchAuction = async (req, res) => {
   try {
-    const query = req.query;
+    const query = req.query.q;
 
-    // if filtering by id, then check if is a valid id
-    if (query._id && !isValidObjectId(query._id)) throw new Error("Invalid id");
+    let searchQuery = {};
 
-    const auctions = await Auction.find(query).sort({ createdAt: -1 });
+    if (query) {
+      const words = query.trim().split(/\s+/); // Splits on spaces and handles multiple spaces
+      searchQuery = {
+        $or: words.flatMap((word) => [
+          { title: { $regex: word, $options: "i" } },
+          { description: { $regex: word, $options: "i" } },
+        ]),
+      };
+    }
+
+    const auctions = await Auction.find(searchQuery).sort({
+      createdAt: -1,
+    });
 
     res.status(200).send(auctions);
   } catch (error) {

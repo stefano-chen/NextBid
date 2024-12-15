@@ -6,32 +6,32 @@ const mongoose = require("mongoose");
 // the Schema constructor accept an options argurment (is an Object)
 // if the timestamps propriety is set, then Mongoose adds the createdAt and updatedAt fields to the document
 const auctionSchema = new mongoose.Schema(
-    {
-        title: {
-            type: String,
-            required: true
-        },
-        description: {
-            type: String,
-            required: true
-        },
-        // A date is represented using the format mm-dd-yyyy hh-mm-ss
-        dueDate: {
-            type: Date,
-            required: true,
-            min: new Date() // The dueDate cannot be previous to the current date
-        },
-        initialBid: {
-            type: Number,
-            required: true,
-            min: 0
-        },
-        owner: {
-            type: mongoose.Schema.ObjectId,
-            required: true
-        }
+  {
+    title: {
+      type: String,
+      required: true,
     },
-    { timestamps: true }
+    description: {
+      type: String,
+      required: true,
+    },
+    // A date is represented using the format mm-dd-yyyy hh-mm-ss
+    dueDate: {
+      type: Date,
+      required: true,
+      min: new Date(), // The dueDate cannot be previous to the current date
+    },
+    initialBid: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    owner: {
+      type: mongoose.Schema.ObjectId,
+      required: true,
+    },
+  },
+  { timestamps: true }
 );
 
 // In Mongoose a Model represents a collection
