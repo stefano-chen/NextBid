@@ -14,42 +14,46 @@ const minBidInc = 0.5;
 // The new bid is accepted only if higher than the highest bid
 // and it must be at least minBidInc higher than the highest bid
 const createBid = async (req, res) => {
-    const userId = req.session.uid;
-    const auctionId = req.params.id;
-    const { amount } = req.body;
+  const userId = req.session.uid;
+  const auctionId = req.params.id;
+  const { amount } = req.body;
 
-    try {
-        if (!isValidObjectId(auctionId) || !isValidObjectId(userId))
-            throw new Error("Invalid id");
+  try {
+    if (!isValidObjectId(auctionId) || !isValidObjectId(userId))
+      throw new Error("Invalid id");
 
-        const auction = await Auction.findById(auctionId);
-        if (!auction) throw new Error("Auction not Found");
+    const auction = await Auction.findById(auctionId);
+    if (!auction) throw new Error("Auction not Found");
 
-        let highestBid = auction.initialBid;
+    const dueDate = new Date(auction.dueDate).getTime();
 
-        // returns an array of bids associated to the auctionId
-        // the array is sorted in descending order
-        // bid contains the first element of the array (the highest current bid)
-        let [bid] = await Bid.aggregate(winningBidPipeline(auctionId));
-        if (bid) highestBid = bid.winningBid.amount;
+    if (dueDate <= new Date().getTime()) throw new Error("Auction Closed");
 
-        if (amount <= highestBid || amount - highestBid < minBidInc)
-            throw new Error("Bid Too Low");
+    let highestBid = auction.initialBid;
 
-        // Makes the bid using the uid inside the session,
-        // the auctionId provided as request parameter
-        // and the amount retrieved from the request body
-        const bidData = {
-            user: userId,
-            auction: auctionId,
-            amount,
-        };
-        bid = await Bid.create(bidData);
+    // returns an array of bids associated to the auctionId
+    // the array is sorted in descending order
+    // bid contains the first element of the array (the highest current bid)
+    let [bid] = await Bid.aggregate(winningBidPipeline(auctionId));
+    if (bid) highestBid = bid.winningBid.amount;
 
-        res.status(200).send(bid);
-    } catch (error) {
-        res.status(400).send({ error: error.message });
-    }
+    if (amount <= highestBid || amount - highestBid < minBidInc)
+      throw new Error("Bid Too Low");
+
+    // Makes the bid using the uid inside the session,
+    // the auctionId provided as request parameter
+    // and the amount retrieved from the request body
+    const bidData = {
+      user: userId,
+      auction: auctionId,
+      amount,
+    };
+    bid = await Bid.create(bidData);
+
+    res.status(200).send(bid);
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
 };
 
 module.exports = createBid;
