@@ -6,6 +6,7 @@ const Auction = require("../../database/Models/auctionModel");
 const searchAuction = async (req, res) => {
   try {
     const query = req.query.q;
+    const limit = Math.round(req.query.limit);
 
     let searchQuery = {};
 
@@ -19,10 +20,13 @@ const searchAuction = async (req, res) => {
       };
     }
 
-    const auctions = await Auction.find(searchQuery).sort({
+    let auctionsQuery = Auction.find(searchQuery).sort({
       createdAt: -1,
     });
 
+    if (limit) auctionsQuery = auctionsQuery.limit(limit);
+
+    const auctions = await auctionsQuery.exec();
     res.status(200).send(auctions);
   } catch (error) {
     res.status(400).send({ error: error.message });

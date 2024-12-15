@@ -29,6 +29,8 @@ const pipeline = (id) => [
       "user.name",
       "user.surname",
       "user.bio",
+      "user.createdAt",
+      "user.updatedAt",
       "auction",
       "updatedAt",
     ],

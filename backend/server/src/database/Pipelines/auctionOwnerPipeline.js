@@ -29,6 +29,8 @@ const pipeline = (id) => [
       "owner.password",
       "owner.__v",
       "owner.bio",
+      "owner.createdAt",
+      "owner.updatedAt",
     ],
   },
 ];

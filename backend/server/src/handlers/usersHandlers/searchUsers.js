@@ -7,6 +7,7 @@ const User = require("../../database/Models/userModel");
 const searchUsers = async (req, res) => {
   try {
     const query = req.query.q;
+    const limit = Math.round(req.query.limit);
 
     let searchQuery = {};
 
@@ -21,13 +22,15 @@ const searchUsers = async (req, res) => {
       };
     }
 
-    const users = await User.find(searchQuery).select([
-      "_id",
-      "username",
-      "name",
-      "surname",
-      "bio",
-    ]);
+    let usersQuery = User.find(searchQuery)
+      .select(["_id", "username", "name", "surname", "bio"])
+      .sort({
+        createdAt: -1,
+      });
+
+    if (limit) usersQuery = usersQuery.limit(limit);
+
+    const users = await usersQuery.exec();
 
     res.status(200).send(users);
   } catch (error) {
