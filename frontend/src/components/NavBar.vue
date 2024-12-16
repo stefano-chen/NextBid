@@ -11,11 +11,11 @@ import { RouterLink } from 'vue-router'
           <h1>NextBid</h1>
         </div>
       </RouterLink>
-      <div class="flex flex-row gap-4">
+      <div class="flex flex-row gap-5">
         <RouterLink to="/"><h1>Home</h1></RouterLink>
         <RouterLink to="/auctions"><h1>Auctions</h1></RouterLink>
         <RouterLink to="/about"><h1>About</h1></RouterLink>
-        <RouterLink to="/login"><h1>Login</h1></RouterLink>
+        <RouterLink to="/signin"><h1>Sign in</h1></RouterLink>
       </div>
     </div>
   </nav>
