@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, inject, watch } from 'vue'
+import { ref, computed, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import eyeopenUrl from '@/assets/images/eye-open.png'
@@ -153,7 +153,7 @@ const toggle = () => {
   transition: opacity 1.5s ease;
 }
 .v-leave-active {
-  transition: opacity 0.1s cubic-bezier(0, 0.7, 1, .7);
+  transition: opacity 0.1s cubic-bezier(0, 0.7, 1, 0.7);
 }
 
 .v-enter-from {
