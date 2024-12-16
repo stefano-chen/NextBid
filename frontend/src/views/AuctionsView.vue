@@ -53,7 +53,6 @@ const scrollToTop = () => {
           class="W-1/2 border-b-2 border-b-gray-200 bg-transparent px-1 outline-none"
           v-model="searchQuery"
           @keypress="submitOnEnter"
-          @input="load(searchQuery)"
         />
         <button @click="load(searchQuery)">
           <SearchIcon class="size-8 fill-gray-200 stroke-gray-200" />
