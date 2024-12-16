@@ -4,6 +4,7 @@ import HomeView from '@/views/HomeView.vue'
 import AboutView from '@/views/AboutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import AuctionsView from '@/views/AuctionsView.vue'
+import SignInView from '@/views/SignInView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -22,6 +23,14 @@ const router = createRouter({
       path: '/about',
       name: 'About',
       component: AboutView,
+    },
+    {
+      path: '/signin',
+      name: 'SignIn',
+      component: SignInView,
+      meta: {
+        hideNavbar: true,
+      },
     },
     {
       path: '/:pathMatch(.*)*',

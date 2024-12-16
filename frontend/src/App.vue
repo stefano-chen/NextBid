@@ -4,6 +4,6 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <NavBar />
+  <NavBar v-if="!$route.meta.hideNavbar" />
   <RouterView />
 </template>

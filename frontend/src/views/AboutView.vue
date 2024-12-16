@@ -2,7 +2,7 @@
 
 <template>
   <div class="flex h-[calc(100vh-6rem)] flex-row items-center justify-between">
-    <div class="flex h-full w-1/2 flex-col items-center justify-center gap-y-10 bg-violet p-8">
+    <div class="flex h-full w-1/2 flex-col items-center justify-center gap-y-10 p-8">
       <h1 class="text-7xl">&#128075; Nice to meet you</h1>
       <div>
         <p>

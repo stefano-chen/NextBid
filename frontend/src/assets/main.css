@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply scrollbar-hidden overflow-scroll bg-glaucous text-gray-200;
+    @apply scrollbar-hidden overflow-scroll bg-violet text-gray-200;
   }
   h1 {
     @apply text-3xl;

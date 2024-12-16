@@ -16,7 +16,7 @@ const dueDate = format(props.auction.dueDate, 'dd-MM-yyyy HH:mm')
 </script>
 
 <template>
-  <div class="bg-violet/50 w-96 rounded-xl p-10 shadow-2xl">
+  <div class="w-96 rounded-xl bg-glaucous/50 p-10 shadow-2xl hover:scale-110 hover:transition">
     <h1>{{ title }}</h1>
     <p class="mt-3 whitespace-pre-wrap text-wrap break-words">
       {{ description }}
