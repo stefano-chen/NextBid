@@ -30,6 +30,13 @@ const toggleShowPassword = () => {
 
 <template>
   <div class="flex w-4/6 flex-col items-start">
+    <div
+      class="mb-2 flex items-center gap-2 transition hover:-translate-y-2 hover:cursor-pointer"
+      @click="$router.back()"
+    >
+      <img class="size-5" src="@/assets/images/back-arrow.png" />
+      <span>Back </span>
+    </div>
     <h1 class="text-4xl">{{ formText.title }}</h1>
     <p class="mb-14 mt-3 text-lg opacity-50">
       {{ formText.subtitle }}
