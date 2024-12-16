@@ -7,7 +7,7 @@ const User = require("../../database/Models/userModel");
 const signUp = async (req, res) => {
   try {
     // Cannot signup if already logged in
-    if (req.session.uid) throw new Error("Please Logout before SignUp");
+    if (req.session.uid) throw new Error("Please Sign out before Signing up");
 
     const userData = req.body;
 

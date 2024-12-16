@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-full justify-center">
-    <div class="rounded-xl bg-red-800 p-3">
+    <div class="rounded-md bg-red-800 px-5 py-3">
       <slot></slot>
     </div>
   </div>

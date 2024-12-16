@@ -38,7 +38,7 @@ const toggleShowPassword = () => {
 }
 
 let userData = {}
-const { user, setUser } = inject('user')
+const { setUser } = inject('user')
 
 let errorMessage = ref('')
 let loarding = ref(false)
@@ -51,7 +51,7 @@ const submit = async () => {
     const response = await axios.post(form.value.endpoint, userData)
     const data = await response.data
     setUser(data)
-    console.log(user.value.username) // Delete for production
+    // console.log(user.value.username) // Delete for production
     localStorage.setItem('NextBid-user', JSON.stringify(data))
     router.push('/')
   } catch (error) {
@@ -119,7 +119,6 @@ const toggle = () => {
       </div>
       <button
         @click="submit"
-        :disabled="loarding"
         class="mt-16 w-full rounded-md bg-violet px-4 py-2"
       >
         {{ form.buttonText }}
