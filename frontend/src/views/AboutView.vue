@@ -2,7 +2,7 @@
 
 <template>
   <div class="flex h-[calc(100vh-6rem)] flex-row items-center justify-between">
-    <div class="bg-violet flex h-full w-1/2 flex-col items-center justify-center gap-y-10 p-8">
+    <div class="flex h-full w-1/2 flex-col items-center justify-center gap-y-10 bg-violet p-8">
       <h1 class="text-7xl">&#128075; Nice to meet you</h1>
       <div>
         <p>
@@ -13,12 +13,19 @@
         </p>
         <br />
         <ul class="ml-10 list-disc text-xl">
-          <li><a href="https://nodejs.org/en">NodeJS</a></li>
-          <li><a href="https://www.mongodb.com/">MongoDB</a></li>
-          <li><a href="https://expressjs.com/">ExpressJS</a></li>
-          <li><a href="https://vuejs.org/">VueJS</a></li>
-          <li><a href="https://www.docker.com/">Docker</a></li>
+          <li><a target="_blank" href="https://nodejs.org/en">NodeJS</a></li>
+          <li><a target="_blank" href="https://www.mongodb.com/">MongoDB</a></li>
+          <li><a target="_blank" href="https://expressjs.com/">ExpressJS</a></li>
+          <li><a target="_blank" href="https://vuejs.org/">VueJS</a></li>
+          <li><a target="_blank" href="https://www.docker.com/">Docker</a></li>
         </ul>
+        <br />
+        <p>
+          The source code is available
+          <a class="underline" href="https://github.com/stefano-chen/NextBid" target="_blank"
+            >here</a
+          >
+        </p>
       </div>
     </div>
     <img class="w-1/2" src="@/assets/images/Ai.jpg" />
