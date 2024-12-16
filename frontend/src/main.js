@@ -14,9 +14,7 @@ function setUser(userData) {
 app.provide('user', { user, setUser })
 
 const userData = localStorage.getItem('NextBid-user')
-console.log(user)
 if (userData) {
-  console.log(userData)
   setUser(JSON.parse(userData))
 }
 

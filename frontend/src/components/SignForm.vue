@@ -43,17 +43,33 @@ const { setUser } = inject('user')
 let errorMessage = ref('')
 let loarding = ref(false)
 
+const checkFields = () => {
+  errorMessage.value = ''
+  let message = ''
+  if (props.signup && !userData.name) message += 'First name  '
+  if (props.signup && !userData.surname) message += '  Last name \n'
+  if (!userData.username) message += 'Username  '
+  if (!userData.password) message += '  Password'
+  if (message) {
+    errorMessage.value = `The following fields are required: \n${message}`
+    return false
+  }
+  return true
+}
+
 const submit = async () => {
   try {
-    errorMessage.value = ''
-    loarding.value = true
-    await new Promise((r) => setTimeout(r, 2000)) // Delete for production
-    const response = await axios.post(form.value.endpoint, userData)
-    const data = await response.data
-    setUser(data)
-    // console.log(user.value.username) // Delete for production
-    localStorage.setItem('NextBid-user', JSON.stringify(data))
-    router.push('/')
+    // errorMessage.value = ''
+    if (checkFields()) {
+      loarding.value = true
+      await new Promise((r) => setTimeout(r, 2000)) // Delete for production
+      const response = await axios.post(form.value.endpoint, userData)
+      const data = await response.data
+      setUser(data)
+      // console.log(user.value.username) // Delete for production
+      localStorage.setItem('NextBid-user', JSON.stringify(data))
+      router.push('/')
+    }
   } catch (error) {
     errorMessage.value = error.response.data.error
   } finally {
@@ -101,7 +117,7 @@ const toggle = () => {
       <input
         class="mt-4 h-12 w-full rounded-md bg-slate-700 p-4 outline-none"
         type="text"
-        placeholder="username"
+        placeholder="Username"
         v-model="userData.username"
       />
       <div class="relative w-full">
@@ -117,15 +133,14 @@ const toggle = () => {
           @click="toggleShowPassword"
         />
       </div>
-      <button
-        @click="submit"
-        class="mt-16 w-full rounded-md bg-violet px-4 py-2"
-      >
+      <button @click="submit" class="mt-14 w-full rounded-md bg-violet px-4 py-2">
         {{ form.buttonText }}
       </button>
     </div>
     <LoadingSpinner class="mt-20" v-else />
-    <ErrorMessage class="mt-6 text-lg" v-if="errorMessage">{{ errorMessage }}</ErrorMessage>
+    <ErrorMessage class="mt-5 text-lg" v-if="errorMessage"
+      ><p class="whitespace-pre-wrap text-lg">{{ errorMessage }}</p></ErrorMessage
+    >
   </div>
 </template>
 
