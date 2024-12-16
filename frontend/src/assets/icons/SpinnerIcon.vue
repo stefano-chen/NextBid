@@ -6,7 +6,7 @@
       fill="none"
       r="200"
       stroke-width="50"
-      stroke="#6072BD"
+      stroke="#6082B6"
       stroke-dasharray="700 1400"
       stroke-linecap="round"
       stroke-dashoffset="0"
