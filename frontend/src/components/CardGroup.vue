@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router'
 import LoadingSpinner from './LoadingSpinner.vue'
 import ErrorMessage from './ErrorMessage.vue'
 
-const props = defineProps(['title', 'auctions', 'viewMore', 'loading', 'loadingError'])
+const props = defineProps(['title', 'auctions', 'viewmore', 'loading', 'error'])
 </script>
 
 <template>
@@ -17,11 +17,11 @@ const props = defineProps(['title', 'auctions', 'viewMore', 'loading', 'loadingE
     </div>
     <div class="items- flex flex-row flex-wrap items-center justify-center gap-10">
       <LoadingSpinner v-if="props.loading" />
-      <ErrorMessage v-else-if="props.loadingError"> Server Error Cannot Fetch Data</ErrorMessage>
+      <ErrorMessage v-else-if="props.error"> Server Error Cannot Fetch Data</ErrorMessage>
       <AuctionCard v-else v-for="auction in props.auctions" :key="auction._id" :auction="auction" />
     </div>
     <RouterLink
-      v-if="props.viewMore === 'true'"
+      v-if="props.viewmore === 'true'"
       to="/auctions"
       class="transition hover:-translate-y-2"
       ><h1>View More</h1></RouterLink

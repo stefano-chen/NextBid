@@ -11,7 +11,7 @@ let loadingError = ref(false)
 onMounted(async () => {
   try {
     // await new Promise((r) => setTimeout(r, 2000)) // Delete for production
-    const response = await axios.get('/api/auctions/?limit=8')
+    const response = await axios.get('/api/auctions/', { params: { limit: 8 } })
     if (response.status === 200) auctions.value = await response.data
   } catch {
     loadingError.value = true
@@ -25,10 +25,10 @@ onMounted(async () => {
   <HeroSection />
 
   <CardGroup
-    :loading-error="loadingError"
+    :error="loadingError"
     :loading="isLoading"
     :auctions="auctions"
     title="Recently Added"
-    view-more="true"
+    viewmore="true"
   />
 </template>
