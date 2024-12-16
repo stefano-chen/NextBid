@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, inject } from 'vue'
+import { ref, computed, inject, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import eyeopenUrl from '@/assets/images/eye-open.png'
@@ -92,65 +92,73 @@ const toggle = () => {
       <img class="size-5" src="@/assets/images/back-arrow.png" />
       <span>Back </span>
     </div>
-    <h1 class="text-4xl">{{ form.title }}</h1>
-    <div class="w-full" v-if="!loarding">
-      <p class="mb-14 mt-3 text-lg opacity-50">
-        {{ form.subtitle }}
-        <span class="ml-2 underline hover:cursor-pointer" @click="toggle">Click here</span>
-      </p>
-      <Transition>
-        <div v-if="props.signup" class="flex gap-4">
+    <Transition>
+      <div :key="form">
+        <h1 class="text-4xl">{{ form.title }}</h1>
+        <div class="w-full" v-if="!loarding">
+          <p class="mb-14 mt-3 text-lg opacity-50">
+            {{ form.subtitle }}
+            <span class="ml-2 underline hover:cursor-pointer" @click="toggle">Click here</span>
+          </p>
+          <!-- <Transition> -->
+          <div v-if="props.signup" class="flex gap-4">
+            <input
+              class="mt-4 h-12 w-1/2 rounded-md bg-slate-700 p-4 outline-none"
+              type="text"
+              placeholder="First name"
+              v-model="userData.name"
+            />
+            <input
+              class="mt-4 h-12 w-1/2 rounded-md bg-slate-700 p-4 outline-none"
+              type="text"
+              placeholder="Last name"
+              v-model="userData.surname"
+            />
+          </div>
+          <!-- </Transition> -->
           <input
-            class="mt-4 h-12 w-1/2 rounded-md bg-slate-700 p-4 outline-none"
+            class="mt-4 h-12 w-full rounded-md bg-slate-700 p-4 outline-none"
             type="text"
-            placeholder="First name"
-            v-model="userData.name"
+            placeholder="Username"
+            v-model="userData.username"
           />
-          <input
-            class="mt-4 h-12 w-1/2 rounded-md bg-slate-700 p-4 outline-none"
-            type="text"
-            placeholder="Last name"
-            v-model="userData.surname"
-          />
+          <div class="relative w-full">
+            <input
+              class="mt-4 h-12 w-full rounded-md bg-slate-700 p-4 outline-none"
+              :type="showPassword ? 'text' : 'password'"
+              placeholder="Enter your password"
+              v-model="userData.password"
+            />
+            <img
+              class="absolute inset-y-7 right-2 z-50 size-6 hover:cursor-pointer"
+              :src="!showPassword ? eyeopenUrl : eyeclosedUrl"
+              @click="toggleShowPassword"
+            />
+          </div>
+          <button @click="submit" class="mt-14 w-full rounded-md bg-violet px-4 py-2">
+            {{ form.buttonText }}
+          </button>
         </div>
-      </Transition>
-      <input
-        class="mt-4 h-12 w-full rounded-md bg-slate-700 p-4 outline-none"
-        type="text"
-        placeholder="Username"
-        v-model="userData.username"
-      />
-      <div class="relative w-full">
-        <input
-          class="mt-4 h-12 w-full rounded-md bg-slate-700 p-4 outline-none"
-          :type="showPassword ? 'text' : 'password'"
-          placeholder="Enter your password"
-          v-model="userData.password"
-        />
-        <img
-          class="absolute inset-y-7 right-2 z-50 size-6 hover:cursor-pointer"
-          :src="!showPassword ? eyeopenUrl : eyeclosedUrl"
-          @click="toggleShowPassword"
-        />
+        <LoadingSpinner class="mt-20" v-else />
+        <ErrorMessage class="mt-5 text-lg" v-if="errorMessage"
+          ><p class="whitespace-pre-wrap text-lg">{{ errorMessage }}</p></ErrorMessage
+        >
       </div>
-      <button @click="submit" class="mt-14 w-full rounded-md bg-violet px-4 py-2">
-        {{ form.buttonText }}
-      </button>
-    </div>
-    <LoadingSpinner class="mt-20" v-else />
-    <ErrorMessage class="mt-5 text-lg" v-if="errorMessage"
-      ><p class="whitespace-pre-wrap text-lg">{{ errorMessage }}</p></ErrorMessage
-    >
+    </Transition>
   </div>
 </template>
 
 <style scoped>
-.v-enter-active,
+.v-enter-active {
+  transition: opacity 1.5s ease;
+}
 .v-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.1s cubic-bezier(0, 0.7, 1, .7);
 }
 
-.v-enter-from,
+.v-enter-from {
+  opacity: 0;
+}
 .v-leave-to {
   opacity: 0;
 }
