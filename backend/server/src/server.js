@@ -27,38 +27,38 @@ const MONGO_URI = process.env.MONGO_URI;
 
 // Use MongoDB to store session data, allowing persistence between restarts
 const store = new MongoDBStore(
-    {
-        uri: MONGO_URI,
-        collection: "sessions",
-    },
-    (error) => {
-        if (error) {
-            console.log(error);
-            console.log("Cannot use Session Store");
-        }
+  {
+    uri: MONGO_URI,
+    collection: "sessions",
+  },
+  (error) => {
+    if (error) {
+      console.log(error);
+      console.log("Cannot use Session Store");
     }
+  }
 );
 
 store.on("error", (error) => {
-    console.log(error);
+  console.log(error);
 });
 
 // Set up the Server Session, used to manage user's authentication
 app.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        saveUninitialized: false,
-        resave: false,
-        name: "nextbid.sid",
-        rolling: false,
-        store: store,
-        cookie: {
-            // If secure set to true: the client browser will send the session cookie only when using a HTTPS connection
-            secure: false,
-            // Each session has a duration of 30 days
-            maxAge: 1000 * 60 * 60 * 24 * 30,
-        },
-    })
+  session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: false,
+    resave: false,
+    name: "nextbid.sid",
+    rolling: false,
+    store: store,
+    cookie: {
+      // If secure set to true: the client browser will send the session cookie only when using a HTTPS connection
+      secure: false,
+      // Each session has a duration of 30 days
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+    },
+  })
 );
 
 app.use(express.json());
@@ -80,12 +80,12 @@ app.use("/api/whoami", whoamiRoutes);
 
 // Listen to HTTP request only if successfully connected to MongoDB
 mongoose
-    .connect(MONGO_URI)
-    .then(() => {
-        app.listen(PORT, () => {
-            console.log(`HTTP server running on port ${PORT}`);
-        });
-    })
-    .catch((error) => {
-        console.log("Connection to MongoDB Failed");
+  .connect(MONGO_URI)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`HTTP server running on port ${PORT}`);
     });
+  })
+  .catch((error) => {
+    console.log("Connection to MongoDB Failed");
+  });

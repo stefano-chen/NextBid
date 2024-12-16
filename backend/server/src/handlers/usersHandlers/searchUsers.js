@@ -22,11 +22,9 @@ const searchUsers = async (req, res) => {
       };
     }
 
-    let usersQuery = User.find(searchQuery)
-      .select(["_id", "username", "name", "surname", "bio"])
-      .sort({
-        createdAt: -1,
-      });
+    let usersQuery = User.find(searchQuery).select("-password").sort({
+      createdAt: -1,
+    });
 
     if (limit) usersQuery = usersQuery.limit(limit);
 

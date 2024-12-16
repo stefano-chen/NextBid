@@ -12,7 +12,7 @@ onMounted(async () => {
   try {
     // await new Promise((r) => setTimeout(r, 2000)) // Delete for production
     const response = await axios.get('/api/auctions/', { params: { limit: 8 } })
-    if (response.status === 200) auctions.value = await response.data
+    auctions.value = await response.data
   } catch {
     loadingError.value = true
   } finally {

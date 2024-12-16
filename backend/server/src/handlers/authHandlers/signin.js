@@ -7,12 +7,12 @@ const User = require("../../database/Models/userModel");
 const signIn = async (req, res) => {
   try {
     // Cannot signin if already logged in
-    if (req.session.uid) throw new Error("Please Logout before SignIn");
+    if (req.session.uid) throw new Error("Please Sign out before Signing In");
 
     const userData = req.body;
 
     // Returns the user by the given username
-    const user = await User.findOne({ username: userData.username });
+    let user = await User.findOne({ username: userData.username });
     if (!user) throw new Error("Invalid Credentials");
 
     // Compare the received password with the hashed password stored in the database
@@ -22,7 +22,9 @@ const signIn = async (req, res) => {
 
     // Create the session variable uid used to authenticate the user in the next requests
     req.session.uid = user._id.toString();
-    res.status(200).send({ msg: "Sign in successful" });
+    user = user.toObject();
+    delete user.password;
+    res.status(200).send(user);
   } catch (error) {
     res.status(401).send({ error: error.message });
   }

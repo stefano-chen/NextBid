@@ -13,7 +13,7 @@ const load = async (query) => {
   try {
     // await new Promise((r) => setTimeout(r, 2000)) // Delete for production
     const response = await axios.get(`/api/auctions/`, { params: { q: query } })
-    if (response.status === 200) auctions.value = await response.data
+    auctions.value = await response.data
   } catch {
     loadingError.value = true
   } finally {
@@ -39,17 +39,19 @@ const submitOnEnter = (event) => {
     :auctions="auctions"
     title="Auctions Listing"
   >
-    <div class="flex h-full w-80 items-center gap-4">
-      <input
-        type="text"
-        class="W-1/2 border-b-2 border-b-gray-200 bg-transparent px-1 outline-none"
-        v-model="searchQuery"
-        @keypress="submitOnEnter"
-        @input="load(searchQuery)"
-      />
-      <button @click="load(searchQuery)">
-        <SearchIcon class="size-8 fill-gray-200 stroke-gray-200" />
-      </button>
+    <div class="absolute right-0">
+      <div class="flex h-full w-80 items-center gap-4">
+        <input
+          type="text"
+          class="W-1/2 border-b-2 border-b-gray-200 bg-transparent px-1 outline-none"
+          v-model="searchQuery"
+          @keypress="submitOnEnter"
+          @input="load(searchQuery)"
+        />
+        <button @click="load(searchQuery)">
+          <SearchIcon class="size-8 fill-gray-200 stroke-gray-200" />
+        </button>
+      </div>
     </div>
   </CardGroup>
 </template>

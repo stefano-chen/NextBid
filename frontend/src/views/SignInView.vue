@@ -4,7 +4,6 @@ import { ref } from 'vue'
 let signup = ref(false)
 const toogle = () => {
   signup.value = !signup.value
-  console.log(signup.value)
 }
 </script>
 
