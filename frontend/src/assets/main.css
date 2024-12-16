@@ -5,22 +5,26 @@
 @layer base {
   html {
     font-family: 'Roboto', system-ui, sans-serif;
+    scrollbar-width: none;
+    @apply scroll-smooth;
   }
 
   body {
-    @apply scrollbar-hidden overflow-scroll bg-violet text-gray-200;
+    @apply overflow-scroll bg-violet text-gray-200;
   }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
   h1 {
     @apply text-3xl;
   }
   p {
     @apply text-xl;
   }
-}
 
-@layer utilities {
-  /* Chrome, Safari and Opera */
-  .scrollbar-hidden::-webkit-scrollbar {
-    display: none;
+  .no-scroll {
+    @apply overflow-hidden;
   }
 }

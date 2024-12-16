@@ -29,6 +29,13 @@ const submitOnEnter = (event) => {
     load(searchQuery)
   }
 }
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
+}
 </script>
 
 <template>
@@ -54,4 +61,9 @@ const submitOnEnter = (event) => {
       </div>
     </div>
   </CardGroup>
+  <img
+    class="fixed bottom-10 right-10 -rotate-90 transition hover:rotate-90 hover:cursor-pointer"
+    src="@/assets/images/back-arrow.png"
+    @click="scrollToTop"
+  />
 </template>
