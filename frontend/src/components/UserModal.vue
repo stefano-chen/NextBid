@@ -1,6 +1,7 @@
 <script setup>
 import axios from 'axios'
 import { inject } from 'vue'
+import BioDisplay from './BioDisplay.vue'
 
 const emit = defineEmits(['close'])
 
@@ -8,16 +9,17 @@ const { show } = defineProps({
   show: Boolean,
 })
 
-const { user, setUser } = inject('user')
+const { user, setUser, deleteUser } = inject('user')
 
 const signout = async () => {
   try {
     await axios.get('/api/auth/signout')
     setUser(null)
-    localStorage.removeItem('NextBid-user')
+    // localStorage.removeItem('NextBid-user')
+    deleteUser()
     emit('close')
   } catch {
-    null
+    console.log('Sign out error')
   }
 }
 </script>
@@ -48,6 +50,8 @@ const signout = async () => {
             />
           </div>
         </div>
+        <hr class="mt-4" />
+        <BioDisplay />
       </div>
     </div>
   </Transition>

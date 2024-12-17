@@ -11,12 +11,26 @@ function setUser(userData) {
   user.value = userData
 }
 
-app.provide('user', { user, setUser })
+function saveUser() {
+  localStorage.setItem('NextBid-user', JSON.stringify(user.value))
+}
+
+function setBio(newBio) {
+  if (user.value) {
+    user.value.bio = newBio
+  }
+}
+
+function deleteUser() {
+  setUser(null)
+  localStorage.removeItem('NextBid-user')
+}
 
 const userData = localStorage.getItem('NextBid-user')
 if (userData) {
   setUser(JSON.parse(userData))
 }
 
+app.provide('user', { user, setUser, setBio, saveUser, deleteUser })
 app.use(router)
 app.mount('#app')

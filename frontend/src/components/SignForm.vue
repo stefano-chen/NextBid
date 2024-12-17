@@ -38,7 +38,7 @@ const toggleShowPassword = () => {
 }
 
 let userData = {}
-const { setUser } = inject('user')
+const { setUser, saveUser } = inject('user')
 
 let errorMessage = ref('')
 let loarding = ref(false)
@@ -65,9 +65,11 @@ const submit = async () => {
       await new Promise((r) => setTimeout(r, 2000)) // Delete for production
       const response = await axios.post(form.value.endpoint, userData)
       const data = await response.data
+      // console.log('userdata:', data) //Delete
       setUser(data)
+      saveUser()
       // console.log(user.value.username) // Delete for production
-      localStorage.setItem('NextBid-user', JSON.stringify(data))
+      // localStorage.setItem('NextBid-user', JSON.stringify(data))
       router.push('/')
     }
   } catch (error) {
