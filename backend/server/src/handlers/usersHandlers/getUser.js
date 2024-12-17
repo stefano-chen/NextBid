@@ -8,11 +8,12 @@ const getUser = async (req, res) => {
     const id = req.params.id;
 
     // checks if the id is valid
-    if (!isValidObjectId(id)) throw new Error("Invalid id");
+    if (!isValidObjectId(id))
+      throw new Error("Invalid ID. Please check the ID and try again.");
 
     // returns the id, username, name and surname of the searched user
     const user = await User.findById(id, "username name surname bio");
-    if (!user) throw new Error("User not Found");
+    if (!user) throw new Error("User not found");
 
     res.status(200).send(user);
   } catch (error) {

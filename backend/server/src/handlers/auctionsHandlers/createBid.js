@@ -20,10 +20,10 @@ const createBid = async (req, res) => {
 
   try {
     if (!isValidObjectId(auctionId) || !isValidObjectId(userId))
-      throw new Error("Invalid id");
+      throw new Error("Invalid ID. Please check the ID and try again.");
 
     const auction = await Auction.findById(auctionId);
-    if (!auction) throw new Error("Auction not Found");
+    if (!auction) throw new Error("Auction not found");
 
     const dueDate = new Date(auction.dueDate).getTime();
 
@@ -38,7 +38,11 @@ const createBid = async (req, res) => {
     if (bid) highestBid = bid.winningBid.amount;
 
     if (amount <= highestBid || amount - highestBid < minBidInc)
-      throw new Error("Bid Too Low");
+      throw new Error(
+        `The amount entered is too low.\nPlease enter at least ${
+          highestBid + minBidInc
+        }.`
+      );
 
     // Makes the bid using the uid inside the session,
     // the auctionId provided as request parameter

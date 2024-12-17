@@ -12,7 +12,7 @@ const getBidsAuction = async (req, res) => {
     const id = req.params.id;
 
     try {
-        if (!id || !isValidObjectId(id)) throw new Error("Invalid id");
+        if (!id || !isValidObjectId(id)) throw new Error("Invalid ID. Please check the ID and try again.");
 
         // Apply an join between the bids and auctions collections
         const bids = await Bid.aggregate(auctionBidsPipeline(id));

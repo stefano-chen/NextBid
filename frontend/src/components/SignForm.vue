@@ -84,76 +84,73 @@ const toggle = () => {
 </script>
 
 <template>
-  <div class="flex w-4/6 flex-col items-start">
-    <div
-      class="mb-2 flex items-center gap-2 transition hover:-translate-y-2 hover:cursor-pointer"
-      @click="$router.push('/')"
-    >
-      <img class="size-5" src="@/assets/images/back-arrow.png" />
-      <span>Back </span>
-    </div>
-    <Transition>
-      <div :key="form">
-        <h1 class="text-4xl">{{ form.title }}</h1>
-        <div class="w-full" v-if="!loarding">
-          <p class="mb-14 mt-3 text-lg opacity-50">
-            {{ form.subtitle }}
-            <span class="ml-2 underline hover:cursor-pointer" @click="toggle">Click here</span>
-          </p>
-          <!-- <Transition> -->
-          <div v-if="props.signup" class="flex gap-4">
-            <input
-              class="mt-4 h-12 w-1/2 rounded-md bg-slate-700 p-4 outline-none"
-              type="text"
-              placeholder="First name"
-              v-model="userData.name"
-            />
-            <input
-              class="mt-4 h-12 w-1/2 rounded-md bg-slate-700 p-4 outline-none"
-              type="text"
-              placeholder="Last name"
-              v-model="userData.surname"
-            />
-          </div>
-          <!-- </Transition> -->
+  <Transition>
+    <div :key="form" class="flex h-full w-3/4 flex-col items-center justify-center">
+      <div
+        class="mb-2 flex items-center gap-2 self-start transition hover:-translate-y-2 hover:cursor-pointer"
+        @click="$router.push('/')"
+      >
+        <img class="size-5" src="@/assets/images/back-arrow.png" />
+        <span>Back </span>
+      </div>
+      <h1 class="self-start text-4xl">{{ form.title }}</h1>
+      <div class="w-full" v-if="!loarding">
+        <p class="mb-8 mt-3 text-lg opacity-50">
+          {{ form.subtitle }}
+          <span class="ml-2 underline hover:cursor-pointer" @click="toggle">Click here</span>
+        </p>
+        <div v-if="props.signup" class="flex gap-4">
+          <input
+            class="mt-4 h-12 w-1/2 rounded-md bg-slate-700 p-4 outline-none"
+            type="text"
+            placeholder="First name"
+            v-model="userData.name"
+          />
+          <input
+            class="mt-4 h-12 w-1/2 rounded-md bg-slate-700 p-4 outline-none"
+            type="text"
+            placeholder="Last name"
+            v-model="userData.surname"
+          />
+        </div>
+        <input
+          class="mt-4 h-12 w-full rounded-md bg-slate-700 p-4 outline-none"
+          type="text"
+          placeholder="Username"
+          v-model="userData.username"
+        />
+        <div class="relative w-full">
           <input
             class="mt-4 h-12 w-full rounded-md bg-slate-700 p-4 outline-none"
-            type="text"
-            placeholder="Username"
-            v-model="userData.username"
+            :type="showPassword ? 'text' : 'password'"
+            placeholder="Enter your password"
+            v-model="userData.password"
           />
-          <div class="relative w-full">
-            <input
-              class="mt-4 h-12 w-full rounded-md bg-slate-700 p-4 outline-none"
-              :type="showPassword ? 'text' : 'password'"
-              placeholder="Enter your password"
-              v-model="userData.password"
-            />
-            <img
-              class="absolute inset-y-7 right-2 z-50 size-6 hover:cursor-pointer"
-              :src="!showPassword ? eyeopenUrl : eyeclosedUrl"
-              @click="toggleShowPassword"
-            />
-          </div>
-          <button @click="submit" class="mt-14 w-full rounded-md bg-violet px-4 py-2">
-            {{ form.buttonText }}
-          </button>
+          <img
+            class="absolute inset-y-7 right-2 z-50 size-6 hover:cursor-pointer"
+            :src="!showPassword ? eyeopenUrl : eyeclosedUrl"
+            @click="toggleShowPassword"
+          />
         </div>
-        <LoadingSpinner class="mt-20" v-else />
-        <ErrorMessage class="mt-5 text-lg" v-if="errorMessage"
-          ><p class="whitespace-pre-wrap text-lg">{{ errorMessage }}</p></ErrorMessage
-        >
+        <button @click="submit" class="mt-8 w-full rounded-md bg-violet px-4 py-2">
+          {{ form.buttonText }}
+        </button>
       </div>
-    </Transition>
-  </div>
+      <LoadingSpinner class="mt-20" v-else />
+      <ErrorMessage class="mt-5 text-lg" v-if="errorMessage"
+        ><p class="whitespace-pre-wrap text-lg">{{ errorMessage }}</p></ErrorMessage
+      >
+    </div>
+  </Transition>
 </template>
 
 <style scoped>
 .v-enter-active {
-  transition: opacity 1.5s ease;
+  transition: opacity 1s ease-in;
 }
 .v-leave-active {
-  transition: opacity 0.1s cubic-bezier(0, 0.7, 1, 0.7);
+  /* transition: opacity 0s cubic-bezier(0,1,1,1); */
+  opacity: 0;
 }
 
 .v-enter-from {

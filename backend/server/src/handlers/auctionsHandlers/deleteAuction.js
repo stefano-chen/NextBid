@@ -12,14 +12,14 @@ const deleteAuction = async (req, res) => {
         const uid = req.session.uid;
         const id = req.params.id;
 
-        if (!isValidObjectId(id)) throw new Error("Invalid id");
+        if (!isValidObjectId(id)) throw new Error("Invalid ID. Please check the ID and try again.");
 
         const auction = await Auction.findById(id, "owner");
 
-        if (!auction) throw new Error("Auction not Found");
+        if (!auction) throw new Error("Auction not found");
 
         // Only the auction's owner can delete the auction
-        if (uid !== auction.owner.toString()) throw new Error("Owner mismatch");
+        if (uid !== auction.owner.toString()) throw new Error("You are not authorized to access this resource.");
 
         // Deletes the auction
         const deletedAuction = await Auction.deleteOne({

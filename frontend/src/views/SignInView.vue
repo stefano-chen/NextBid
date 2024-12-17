@@ -9,11 +9,11 @@ const toogle = () => {
 
 <template>
   <div class="flex h-screen items-center justify-center overflow-hidden bg-violet">
-    <div class="flex h-3/4 w-2/3 flex-row rounded-2xl bg-slate-800">
-      <div class="w-1/2 pb-5 pl-5 pt-5">
+    <div class="flex h-3/4 w-2/3 flex-row items-center justify-center rounded-2xl bg-slate-800">
+      <div class="h-full w-1/2 p-4">
         <img class="h-full rounded-2xl" src="@/assets/images/Designer.png" />
       </div>
-      <div class="ml-36 mt-36 h-full w-1/2">
+      <div class="flex h-full w-1/2 justify-center">
         <SignForm @toggleform="toogle" :signup="signup" />
       </div>
     </div>

@@ -9,19 +9,20 @@ const bidInfoPipeline = require("../../database/Pipelines/bidInfoPipeline");
 
 // returns the info about a bid, identified by a given id
 const getBid = async (req, res) => {
-    try {
-        const id = req.params.id;
+  try {
+    const id = req.params.id;
 
-        if (!isValidObjectId(id)) throw new Error("Invalid id");
+    if (!isValidObjectId(id))
+      throw new Error("Invalid ID. Please check the ID and try again.");
 
-        // Apply an join between the bids and users collections
-        const [bid] = await Bid.aggregate(bidInfoPipeline(id));
-        if (!bid) throw new Error("Bid not Found");
+    // Apply an join between the bids and users collections
+    const [bid] = await Bid.aggregate(bidInfoPipeline(id));
+    if (!bid) throw new Error("Bid not found");
 
-        res.status(200).send(bid);
-    } catch (error) {
-        res.status(400).send({ error: error.message });
-    }
+    res.status(200).send(bid);
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
 };
 
 module.exports = getBid;

@@ -13,14 +13,14 @@ const modifyAuction = async (req, res) => {
         // Allows only to modify title and description
         const { title, description } = req.body;
 
-        if (!isValidObjectId(id)) throw new Error("Invalid id");
+        if (!isValidObjectId(id)) throw new Error("Invalid ID. Please check the ID and try again.");
 
         let auction = await Auction.findById(id);
-        if (!auction) throw new Error("Auction not Found");
+        if (!auction) throw new Error("Auction not found");
 
         // Only the auction's owner can modify the auction
         if (req.session.uid !== auction.owner.toString())
-            throw new Error("Owner mismatch");
+            throw new Error("You are not authorized to access this resource.");
 
         if (title && !isEmpty(title, { ignore_whitespace: true }))
             // .trim removes the whitespaces at the begin and at the end of the string

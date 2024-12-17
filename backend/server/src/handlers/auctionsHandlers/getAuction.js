@@ -12,10 +12,10 @@ const getAuction = async (req, res) => {
     try {
         const id = req.params.id;
 
-        if (!isValidObjectId(id)) throw new Error("Invalid id");
+        if (!isValidObjectId(id)) throw new Error("Invalid ID. Please check the ID and try again.");
 
         let auction = await Auction.findById(id);
-        if (!auction) throw new Error("Auction not Found");
+        if (!auction) throw new Error("Auction not found");
 
         // apply a join between the auctions and the users collections
         [auction] = await Auction.aggregate(auctionOwnerPipeline(id));
