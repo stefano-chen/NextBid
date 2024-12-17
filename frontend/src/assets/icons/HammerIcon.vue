@@ -1,0 +1,66 @@
+<template>
+  <svg
+    version="1.1"
+    id="Layer_1"
+    xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="800px"
+    height="800px"
+    viewBox="0 0 64 64"
+    enable-background="new 0 0 64 64"
+    xml:space="preserve"
+  >
+    <title>Hammer</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" sketch:type="MSPage">
+      <g id="Hammer" transform="translate(1.000000, 1.000000)" sketch:type="MSLayerGroup">
+        <path
+          id="Shape_4_"
+          sketch:type="MSShapeGroup"
+          fill="#58595B"
+          stroke="#58595B"
+          stroke-width="2"
+          d="M35.618,30.688l-30.34,30.34
+			c-0.781,0.781-2.038,0.79-2.81,0.02l-1.452-1.453c-0.771-0.771-0.762-2.028,0.019-2.81l30.34-30.339"
+        />
+        <path
+          id="Shape_2_"
+          sketch:type="MSShapeGroup"
+          fill="#58595B"
+          stroke="#58595B"
+          stroke-width="2"
+          d="M42.601,37.847L24.216,19.462"
+        />
+        <path
+          id="Shape_3_"
+          sketch:type="MSShapeGroup"
+          fill="#58595B"
+          stroke="#58595B"
+          stroke-width="2"
+          d="M36.943,6.734l18.385,18.385"
+        />
+        <path
+          id="Shape"
+          sketch:type="MSShapeGroup"
+          fill="#58595B"
+          stroke="#58595B"
+          stroke-width="2"
+          d="M27.044,18.049l-2.828,2.827
+			c-0.781,0.781-2.048,0.781-2.828,0l-2.829-2.828c-0.78-0.781-0.78-2.048,0-2.828L32.702,1.077c0.781-0.78,2.047-0.78,2.828,0
+			l2.828,2.829c0.781,0.78,0.781,2.047,0.001,2.828l-2.771,2.77"
+        />
+        <path
+          id="Shape_1_"
+          sketch:type="MSShapeGroup"
+          fill="#58595B"
+          stroke="#58595B"
+          stroke-width="2"
+          d="M52.559,26.475l2.77-2.77
+			c0.781-0.781,2.048-0.781,2.829,0l2.828,2.828c0.781,0.781,0.781,2.047,0,2.828L46.843,43.504c-0.78,0.781-2.047,0.781-2.828,0
+			l-2.828-2.828c-0.781-0.781-0.781-2.048,0-2.829l2.827-2.827"
+        />
+      </g>
+    </g>
+  </svg>
+</template>

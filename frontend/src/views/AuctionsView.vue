@@ -11,7 +11,6 @@ let searchQuery = ''
 
 const load = async (query) => {
   try {
-    // await new Promise((r) => setTimeout(r, 2000)) // Delete for production
     const response = await axios.get(`/api/auctions/`, { params: { q: query } })
     auctions.value = await response.data
   } catch {
@@ -29,13 +28,6 @@ const submitOnEnter = (event) => {
     load(searchQuery)
   }
 }
-
-// const scrollToTop = () => {
-//   window.scrollTo({
-//     top: 0,
-//     behavior: 'smooth',
-//   })
-// }
 </script>
 
 <template>
@@ -61,9 +53,4 @@ const submitOnEnter = (event) => {
       </div>
     </div>
   </CardGroup>
-  <!-- <img
-    class="fixed bottom-10 right-10 -rotate-90 transition hover:rotate-90 hover:cursor-pointer"
-    src="@/assets/images/back-arrow.png"
-    @click="scrollToTop"
-  /> -->
 </template>

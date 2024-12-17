@@ -1,21 +1,30 @@
 <script setup>
 import GeneralUserIcon from '@/assets/icons/GeneralUserIcon.vue'
 import CardGroup from '@/components/CardGroup.vue'
+import TrophyIcon from '@/assets/icons/TrophyIcon.vue'
+import HammerIcon from '@/assets/icons/HammerIcon.vue'
 import axios from 'axios'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
+// const showAuctions = ref(route.query.show)
+// console.log(showAuctions)
 let userData = ref({})
 let isLoading = ref(true)
 let loadingError = ref(false)
+let showMyAuctions = ref(true)
+
+const toggleMyAuctions = () => {
+  showMyAuctions.value = !showMyAuctions.value
+}
 
 const renderData = () => {
-  if (userData.value) {
+  if (userData.value && !showMyAuctions.value) {
     return userData.value.wonAuctions
   }
-  return []
+  return userData.value.myAuctions
 }
 
 const loadUserData = async () => {
@@ -37,6 +46,10 @@ const username = computed(() => userData.value.username)
 
 const fullname = computed(() => userData.value.name + ' ' + userData.value.surname)
 
+const title = computed(() => (showMyAuctions.value ? 'My Auctions' : 'Won Auctions'))
+
+const btnText = computed(() => (showMyAuctions.value ? 'My Wins' : 'My Auctions'))
+
 onMounted(loadUserData)
 </script>
 
@@ -51,6 +64,16 @@ onMounted(loadUserData)
       >
         {{ bio }}
       </div>
+      <div
+        @click.prevent.stop="toggleMyAuctions"
+        class="m-4 flex items-center gap-2 rounded-md border p-2 hover:cursor-pointer"
+      >
+        <TrophyIcon v-show="showMyAuctions" class="size-12" />
+        <HammerIcon v-show="!showMyAuctions" class="size-12" />
+        <laber class="select-none text-3xl">
+          {{ btnText }}
+        </laber>
+      </div>
     </div>
   </div>
   <div class="flex h-screen w-screen flex-row justify-end">
@@ -59,7 +82,7 @@ onMounted(loadUserData)
         :error="loadingError"
         :loading="isLoading"
         :data="renderData()"
-        title="Won Auctions"
+        :title="title"
         topbtn="true"
       />
     </div>

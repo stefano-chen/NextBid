@@ -1,4 +1,4 @@
-const { isValidObjectId } = require("mongoose");
+const { isValidObjectId, Types } = require("mongoose");
 
 const User = require("../../database/Models/userModel");
 const Auction = require("../../database/Models/auctionModel");
@@ -20,9 +20,13 @@ const getUser = async (req, res) => {
     if (!user) throw new Error("User not found");
 
     const wonAuctions = await Auction.aggregate(userWinsPipeline(id));
+    const userAuctions = await Auction.find({
+      owner: new Types.ObjectId(`${id}`),
+    });
 
     user = user.toObject();
     user.wonAuctions = wonAuctions;
+    user.myAuctions = userAuctions;
 
     res.status(200).send(user);
   } catch (error) {
