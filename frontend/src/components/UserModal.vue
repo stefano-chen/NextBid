@@ -15,7 +15,6 @@ const signout = async () => {
   try {
     await axios.get('/api/auth/signout')
     setUser(null)
-    // localStorage.removeItem('NextBid-user')
     deleteUser()
     emit('close')
   } catch {
@@ -50,8 +49,15 @@ const signout = async () => {
             />
           </div>
         </div>
-        <hr class="mt-4" />
+        <hr class="mb-4 mt-4" />
         <BioDisplay />
+        <hr class="mt-8 mb-8" />
+        <RouterLink @click="emit('close')" :to="`/user/${user._id}`">
+          <div class="flex items-center gap-2 rounded-md p-2 hover:bg-slate-800/50">
+            <img class="size-6" src="@/assets/images/user-icon.png" />
+            <label>Your profile</label>
+          </div>
+        </RouterLink>
       </div>
     </div>
   </Transition>

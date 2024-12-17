@@ -1,4 +1,4 @@
-const { isValidObjectId } = require("mongoose");
+const { isValidObjectId, Types } = require("mongoose");
 const Bid = require("../../database/Models/bidModel");
 const Auction = require("../../database/Models/auctionModel");
 
@@ -53,6 +53,9 @@ const createBid = async (req, res) => {
       amount,
     };
     bid = await Bid.create(bidData);
+
+    auction.set("winner", userId, Types.ObjectId);
+    await auction.save();
 
     res.status(200).send(bid);
   } catch (error) {

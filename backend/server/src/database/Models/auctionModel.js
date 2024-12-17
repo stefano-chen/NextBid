@@ -30,6 +30,11 @@ const auctionSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       required: true,
     },
+    winner: {
+      type: mongoose.Schema.ObjectId,
+      required: false,
+      default: null,
+    },
   },
   { timestamps: true }
 );

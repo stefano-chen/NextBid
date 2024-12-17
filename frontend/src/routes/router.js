@@ -5,6 +5,7 @@ import AboutView from '@/views/AboutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import AuctionsView from '@/views/AuctionsView.vue'
 import SignInView from '@/views/SignInView.vue'
+import UserProfileView from '@/views/UserProfileView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -31,6 +32,11 @@ const router = createRouter({
       meta: {
         hideNavbar: true,
       },
+    },
+    {
+      path: '/user/:id',
+      name: 'UserByID',
+      component: UserProfileView,
     },
     {
       path: '/:pathMatch(.*)*',

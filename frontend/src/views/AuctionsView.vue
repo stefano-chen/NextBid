@@ -30,12 +30,12 @@ const submitOnEnter = (event) => {
   }
 }
 
-const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  })
-}
+// const scrollToTop = () => {
+//   window.scrollTo({
+//     top: 0,
+//     behavior: 'smooth',
+//   })
+// }
 </script>
 
 <template>
@@ -43,8 +43,9 @@ const scrollToTop = () => {
     :error="loadingError"
     :loading="isLoading"
     class="mt-8"
-    :auctions="auctions"
+    :data="auctions"
     title="Auctions Listing"
+    topbtn="true"
   >
     <div class="absolute right-0">
       <div class="flex h-full w-80 items-center gap-4">
@@ -60,9 +61,9 @@ const scrollToTop = () => {
       </div>
     </div>
   </CardGroup>
-  <img
+  <!-- <img
     class="fixed bottom-10 right-10 -rotate-90 transition hover:rotate-90 hover:cursor-pointer"
     src="@/assets/images/back-arrow.png"
     @click="scrollToTop"
-  />
+  /> -->
 </template>

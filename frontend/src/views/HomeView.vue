@@ -27,7 +27,7 @@ onMounted(async () => {
   <CardGroup
     :error="loadingError"
     :loading="isLoading"
-    :auctions="auctions"
+    :data="auctions"
     title="Recently Added"
     viewmore="true"
   />

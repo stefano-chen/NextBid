@@ -37,7 +37,7 @@ const toggleEdit = () => {
 </script>
 
 <template>
-  <label class="mt-4 block text-xl" for="bio">Profile Description</label>
+  <label class="block text-xl" for="bio">Profile Description</label>
   <div id="bio" class="relative mt-1 h-1/6 w-full">
     <textarea
       id="textarea"
