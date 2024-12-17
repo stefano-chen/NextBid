@@ -70,9 +70,9 @@ onMounted(loadUserData)
       >
         <TrophyIcon v-show="showMyAuctions" class="size-12" />
         <HammerIcon v-show="!showMyAuctions" class="size-12" />
-        <laber class="select-none text-3xl">
+        <label class="select-none text-3xl hover:cursor-pointer">
           {{ btnText }}
-        </laber>
+        </label>
       </div>
     </div>
   </div>

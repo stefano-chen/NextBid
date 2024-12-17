@@ -1,14 +1,7 @@
-<script setup>
-import SignForm from '@/components/SignForm.vue'
-import { ref } from 'vue'
-let signup = ref(false)
-const toogle = () => {
-  signup.value = !signup.value
-}
-</script>
+<script setup></script>
 
 <template>
-  <div class="flex h-screen items-center justify-center overflow-hidden bg-violet">
+  <div class="flex h-[calc(100vh-6rem)] items-center justify-center overflow-hidden bg-violet">
     <div
       class="flex h-3/4 w-2/3 flex-row items-center justify-center rounded-2xl bg-slate-800 shadow-xl shadow-slate-700"
     >

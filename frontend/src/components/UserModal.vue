@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { inject } from 'vue'
 import BioDisplay from './BioDisplay.vue'
+import AddIcon from '@/assets/icons/AddIcon.vue'
 
 const emit = defineEmits(['close'])
 
@@ -51,11 +52,17 @@ const signout = async () => {
         </div>
         <hr class="mb-4 mt-4" />
         <BioDisplay />
-        <hr class="mt-8 mb-8" />
+        <hr class="mb-8 mt-8" />
         <RouterLink @click="emit('close')" :to="`/user/${user._id}`">
           <div class="flex items-center gap-2 rounded-md p-2 hover:bg-slate-800/50">
-            <img class="size-6" src="@/assets/images/user-icon.png" />
+            <img class="size-7" src="@/assets/images/user-icon.png" />
             <label>Your profile</label>
+          </div>
+        </RouterLink>
+        <RouterLink @click="emit('close')" to="/auction/create">
+          <div class="flex items-center gap-2 rounded-md p-2 hover:bg-slate-800/50">
+            <AddIcon class="size-7" />
+            <label>Create Auction</label>
           </div>
         </RouterLink>
       </div>
