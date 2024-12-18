@@ -20,6 +20,7 @@ const originalBio = computed({
 const updateBio = async () => {
   try {
     await axios.post('/api/users/bio', { bio: originalBio.value })
+    console.log('ok')
     saveUser()
   } catch (error) {
     console.log(error.response.data)

@@ -9,14 +9,14 @@ import axios from 'axios'
 
 let isEditable = ref(false)
 
-const maxCharTitle = 21
-const maxCharDescription = 180
 const props = defineProps(['auction', 'commands'])
-let title = props.auction.title
-if (title && title.length > maxCharTitle) title = title.slice(0, maxCharTitle - 1) + '...'
-let description = props.auction.description
-if (description && description.length > maxCharDescription)
-  description = description.slice(0, maxCharDescription - 1) + '...'
+let originalTitle = props.auction.title
+
+let originalDescription = props.auction.description
+
+let title = originalTitle
+let description = originalDescription
+
 const auctionId = props.auction._id
 const initialBid = props.auction.initialBid?.toFixed(2)
 const dueDate = format(props.auction.dueDate, 'dd-MM-yyyy HH:mm')
@@ -25,7 +25,11 @@ const emit = defineEmits(['delete'])
 
 const updateAuction = async () => {
   try {
-    await axios.put(`/api/auctions/${auctionId}`, { title, description })
+    if (title !== originalTitle || description !== originalDescription) {
+      await axios.put(`/api/auctions/${auctionId}`, { title, description })
+      originalDescription = description
+      originalTitle = title
+    }
   } catch (error) {
     console.log(error.response.data)
   }
