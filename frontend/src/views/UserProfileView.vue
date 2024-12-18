@@ -41,7 +41,6 @@ const loadUserData = async () => {
     const userId = route.params.id
     const response = await axios.get(`/api/users/${userId}`)
     userData.value = await response.data
-    console.log(userData.value)
   } catch {
     loadingError.value = true
   } finally {

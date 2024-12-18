@@ -25,7 +25,6 @@ const updateBio = async () => {
   try {
     if (newBio !== originalBio) {
       await axios.post('/api/users/bio', { bio: newBio })
-      console.log('ok')
       setBio(newBio)
       saveUser()
       originalBio = newBio
