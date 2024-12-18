@@ -84,6 +84,7 @@ onMounted(loadUserData)
         :data="renderData()"
         :title="title"
         topbtn="true"
+        type="auction"
       />
     </div>
   </div>

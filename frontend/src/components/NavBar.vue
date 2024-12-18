@@ -20,6 +20,7 @@ const isAuth = computed(() => (user.value ? true : false))
       <div class="flex flex-row items-center gap-5">
         <RouterLink to="/"><h1>Home</h1></RouterLink>
         <RouterLink to="/auctions"><h1>Auctions</h1></RouterLink>
+        <RouterLink to="/users"><h1>Users</h1></RouterLink>
         <RouterLink to="/about"><h1>About</h1></RouterLink>
         <RouterLink v-if="!isAuth" to="/signin"><h1>Sign in</h1></RouterLink>
         <UserDropdown v-else />

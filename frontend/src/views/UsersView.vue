@@ -11,7 +11,7 @@ let searchQuery = ''
 
 const load = async (query) => {
   try {
-    const response = await axios.get(`/api/auctions/`, { params: { q: query } })
+    const response = await axios.get(`/api/users/`, { params: { q: query } })
     auctions.value = await response.data
   } catch {
     loadingError.value = true
@@ -38,7 +38,7 @@ const submitOnEnter = (event) => {
     :data="auctions"
     title="Auctions Listing"
     topbtn="true"
-    type="auction"
+    type="user"
   >
     <div class="absolute right-0">
       <div class="flex h-full w-80 items-center gap-4">

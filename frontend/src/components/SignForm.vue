@@ -1,10 +1,10 @@
 <script setup>
-import { ref, computed, inject } from 'vue'
+import { ref, computed, inject, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import eyeopenUrl from '@/assets/images/eye-open.png'
 import eyeclosedUrl from '@/assets/images/eye-closed.png'
-import ErrorMessage from './ErrorMessage.vue'
+import ErrorMessage from './GenericMessage.vue'
 import LoadingSpinner from './LoadingSpinner.vue'
 
 const router = useRouter()
@@ -43,15 +43,23 @@ const { setUser, saveUser } = inject('user')
 let errorMessage = ref('')
 let loarding = ref(false)
 
-const checkFields = () => {
+let timeoutID
+
+const showMessage = (msg) => {
   errorMessage.value = ''
+  clearTimeout(timeoutID)
+  errorMessage.value = msg
+  timeoutID = setTimeout(() => (errorMessage.value = ''), 5000)
+}
+
+const checkFields = () => {
   let message = ''
-  if (props.signup && !userData.name) message += 'First name  '
-  if (props.signup && !userData.surname) message += '  Last name \n'
-  if (!userData.username) message += 'Username  '
-  if (!userData.password) message += '  Password'
+  if (props.signup && !userData.name) message += 'First name '
+  if (props.signup && !userData.surname) message += ' Last name \n'
+  if (!userData.username) message += 'Username '
+  if (!userData.password) message += ' Password'
   if (message) {
-    errorMessage.value = `The following fields are required: \n${message}`
+    showMessage(`The following fields are required: \n${message}`)
     return false
   }
   return true
@@ -59,7 +67,6 @@ const checkFields = () => {
 
 const submit = async () => {
   try {
-    // errorMessage.value = ''
     if (checkFields()) {
       loarding.value = true
       await new Promise((r) => setTimeout(r, 2000)) // Delete for production
@@ -73,7 +80,7 @@ const submit = async () => {
       router.push('/')
     }
   } catch (error) {
-    errorMessage.value = error.response.data.error
+    showMessage(error.response.data.error)
   } finally {
     loarding.value = false
   }
@@ -83,11 +90,13 @@ const toggle = () => {
   errorMessage.value = ''
   emit('toggleform')
 }
+
+onUnmounted(() => clearTimeout(timeoutID))
 </script>
 
 <template>
   <Transition>
-    <div :key="form" class="flex h-full w-3/4 flex-col items-center justify-center">
+    <div :key="form" class="relative flex h-full w-3/4 flex-col items-center justify-center">
       <div
         class="mb-2 flex items-center gap-2 self-start transition hover:-translate-y-2 hover:cursor-pointer"
         @click="$router.push('/')"
@@ -134,14 +143,16 @@ const toggle = () => {
             @click="toggleShowPassword"
           />
         </div>
-        <button @click="submit" class="mt-8 w-full rounded-md bg-violet px-4 py-2">
+        <button @click="submit" class="relative mt-8 w-full rounded-md bg-violet px-4 py-2">
           {{ form.buttonText }}
         </button>
       </div>
       <LoadingSpinner class="mt-20" v-else />
-      <ErrorMessage class="mt-5 text-lg" v-if="errorMessage"
-        ><p class="whitespace-pre-wrap text-lg">{{ errorMessage }}</p></ErrorMessage
-      >
+      <Transition name="error">
+        <ErrorMessage type="error" class="absolute top-6 mt-5 text-lg" v-if="errorMessage"
+          ><p class="whitespace-pre-wrap text-lg">{{ errorMessage }}</p></ErrorMessage
+        >
+      </Transition>
     </div>
   </Transition>
 </template>
@@ -159,6 +170,20 @@ const toggle = () => {
   opacity: 0;
 }
 .v-leave-to {
+  opacity: 0;
+}
+
+.error-enter-active {
+  transition: opacity 0.5s ease-in;
+}
+.error-leave-active {
+  transition: opacity 0.5s ease-in;
+}
+
+.error-enter-from {
+  opacity: 0;
+}
+.error-leave-to {
   opacity: 0;
 }
 </style>

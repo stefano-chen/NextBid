@@ -7,6 +7,7 @@ import AuctionsView from '@/views/AuctionsView.vue'
 import SignInView from '@/views/SignInView.vue'
 import UserProfileView from '@/views/UserProfileView.vue'
 import CreateAuctionView from '@/views/CreateAuctionView.vue'
+import UsersView from '@/views/UsersView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -20,6 +21,11 @@ const router = createRouter({
       path: '/auctions',
       name: 'Auctions',
       component: AuctionsView,
+    },
+    {
+      path: '/users',
+      name: 'Users',
+      component: UsersView,
     },
     {
       path: '/about',

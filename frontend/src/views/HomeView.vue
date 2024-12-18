@@ -30,5 +30,6 @@ onMounted(async () => {
     :data="auctions"
     title="Recently Added"
     viewmore="true"
+    type="auction"
   />
 </template>

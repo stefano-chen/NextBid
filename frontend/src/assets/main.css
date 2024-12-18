@@ -6,15 +6,12 @@
   html {
     font-family: 'Roboto', system-ui, sans-serif;
     scrollbar-width: none;
+    scrollbar-color: #e5e7eb #334155;
     @apply scroll-smooth;
   }
 
   body {
-    @apply overflow-scroll bg-violet text-gray-200;
-  }
-
-  html::-webkit-scrollbar {
-    display: none;
+    @apply overflow-scroll overflow-x-hidden bg-violet text-gray-200;
   }
 
   h1 {

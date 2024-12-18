@@ -22,7 +22,7 @@ const getUser = async (req, res) => {
     const wonAuctions = await Auction.aggregate(userWinsPipeline(id));
     const userAuctions = await Auction.find({
       owner: new Types.ObjectId(`${id}`),
-    });
+    }).sort({ createdAt: -1 });
 
     user = user.toObject();
     user.wonAuctions = wonAuctions;

@@ -2,9 +2,10 @@
 import AuctionCard from './AuctionCard.vue'
 import { RouterLink } from 'vue-router'
 import LoadingSpinner from './LoadingSpinner.vue'
-import ErrorMessage from './ErrorMessage.vue'
+import ErrorMessage from './GenericMessage.vue'
+import UserCard from './UserCard.vue'
 
-const props = defineProps(['title', 'data', 'viewmore', 'loading', 'error', 'topbtn'])
+const props = defineProps(['title', 'data', 'viewmore', 'loading', 'error', 'topbtn', 'type'])
 
 const scrollToTop = () => {
   window.scrollTo({
@@ -22,8 +23,21 @@ const scrollToTop = () => {
     </div>
     <div class="flex flex-row flex-wrap items-center justify-center gap-10">
       <LoadingSpinner v-if="props.loading" />
-      <ErrorMessage v-else-if="props.error"> Server Error Cannot Fetch Data</ErrorMessage>
-      <AuctionCard v-else v-for="data in props.data" :key="data._id" :auction="data" />
+      <ErrorMessage type="error" v-else-if="props.error">
+        Server Error Cannot Fetch Data</ErrorMessage
+      >
+      <AuctionCard
+        v-else-if="props.type === 'auction'"
+        v-for="auction in props.data"
+        :key="auction._id"
+        :auction="auction"
+      />
+      <UserCard
+        v-else-if="props.type === 'user'"
+        v-for="user in props.data"
+        :key="user._id"
+        :user="user"
+      />
     </div>
     <RouterLink
       v-if="props.viewmore === 'true'"
