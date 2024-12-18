@@ -41,6 +41,7 @@ const loadUserData = async () => {
     const userId = route.params.id
     const response = await axios.get(`/api/users/${userId}`)
     userData.value = await response.data
+    console.log(userData.value)
   } catch {
     loadingError.value = true
   } finally {
@@ -64,7 +65,7 @@ const btnText = computed(() => (showMyAuctions.value ? 'Show Wins' : 'Show Aucti
 const { user } = inject('user')
 
 const showEdit = computed(() => {
-  return user.value._id === route.params.id
+  return user.value?._id === route.params.id
 })
 
 onMounted(loadUserData)
@@ -76,8 +77,8 @@ provide('data', dataList)
   <div class="fixed top-24 h-full w-2/5 bg-glaucous">
     <div v-if="!isLoading" class="flex h-full flex-col items-center">
       <GeneralUserIcon class="h-1/3 w-1/3" />
-      <h1 class="mb-1">{{ username || 'User' }}</h1>
-      <h1 class="mb-8 text-lg">({{ fullname || 'fullname' }})</h1>
+      <h1 class="mb-1">{{ username }}</h1>
+      <h1 class="mb-8 text-lg">({{ fullname }})</h1>
       <div
         class="h-1/6 w-1/2 resize-none overflow-y-scroll whitespace-pre-wrap break-words rounded-lg bg-slate-800/30 p-3 text-xl"
       >

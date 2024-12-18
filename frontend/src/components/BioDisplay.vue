@@ -1,5 +1,5 @@
 <script setup>
-import { inject, computed, ref } from 'vue'
+import { inject, ref } from 'vue'
 import EditIcon from '@/assets/icons/EditIcon.vue'
 import SaveIcon from '@/assets/icons/SaveIcon.vue'
 import axios from 'axios'
@@ -7,21 +7,29 @@ import axios from 'axios'
 let editable = ref(false)
 const { user, setBio, saveUser } = inject('user')
 
-const originalBio = computed({
-  get() {
-    return user.value.bio
-  },
+// const originalBio = computed({
+//   get() {
+//     return user.value.bio
+//   },
 
-  set(newBio) {
-    setBio(newBio)
-  },
-})
+//   set(newBio) {
+//     setBio(newBio)
+//   },
+// })
+
+let originalBio = user.value.bio
+
+let newBio = originalBio
 
 const updateBio = async () => {
   try {
-    await axios.post('/api/users/bio', { bio: originalBio.value })
-    console.log('ok')
-    saveUser()
+    if (newBio !== originalBio) {
+      await axios.post('/api/users/bio', { bio: newBio })
+      console.log('ok')
+      setBio(newBio)
+      saveUser()
+      originalBio = newBio
+    }
   } catch (error) {
     console.log(error.response.data)
   }
@@ -43,7 +51,7 @@ const toggleEdit = () => {
     <textarea
       id="textarea"
       class="h-full w-full resize-none overflow-y-scroll whitespace-pre-wrap break-words rounded-lg bg-slate-800/50 p-3"
-      v-model="originalBio"
+      v-model="newBio"
       placeholder="You don't have a profile description yet.&#10;Add one to tell others more about yourself!"
       :disabled="!editable"
     >

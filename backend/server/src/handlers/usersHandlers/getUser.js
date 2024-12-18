@@ -13,10 +13,7 @@ const getUser = async (req, res) => {
     if (!isValidObjectId(id))
       throw new Error("Invalid ID. Please check the ID and try again.");
 
-    User.aggregate();
-
-    // returns the id, username, name and surname of the searched user
-    let user = await User.findById(id, "username name surname bio");
+    let user = await User.findById(id);
     if (!user) throw new Error("User not found");
 
     const wonAuctions = await Auction.aggregate(userWinsPipeline(id));
@@ -25,6 +22,7 @@ const getUser = async (req, res) => {
     }).sort({ createdAt: -1 });
 
     user = user.toObject();
+    delete user.password;
     user.wonAuctions = wonAuctions;
     user.myAuctions = userAuctions;
 

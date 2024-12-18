@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema(
     bio: {
       type: String,
       required: false,
+      default: "",
     },
     password: {
       type: String,
