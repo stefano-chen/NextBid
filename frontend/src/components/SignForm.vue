@@ -143,7 +143,10 @@ onUnmounted(() => clearTimeout(timeoutID))
             @click="toggleShowPassword"
           />
         </div>
-        <button @click="submit" class="relative mt-8 w-full rounded-md bg-violet px-4 py-2">
+        <button
+          @click="submit"
+          class="relative mt-8 w-full rounded-md bg-violet px-4 py-2 transition hover:scale-105"
+        >
           {{ form.buttonText }}
         </button>
       </div>

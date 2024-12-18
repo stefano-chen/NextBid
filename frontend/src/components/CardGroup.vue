@@ -16,7 +16,7 @@ const scrollToTop = () => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-y-10">
+  <div class="relative top-24 flex flex-col items-center gap-y-10">
     <div class="flex w-full flex-row items-center justify-center">
       <h1 class="text-5xl">{{ props.title }}</h1>
       <slot></slot>

@@ -21,11 +21,15 @@ const showMsg = (options) => {
   clearTimeout(timeoutID)
   if (options?.type === 'success') {
     successMessage.value = options?.msg
-    timeoutID = setTimeout(() => (successMessage.value = ''), 3500)
+    timeoutID = setTimeout(() => {
+      successMessage.value = ''
+    }, 1500)
   }
   if (options?.type === 'error') {
     errorMessage.value = options?.msg
-    timeoutID = setTimeout(() => (errorMessage.value = ''), 3500)
+    timeoutID = setTimeout(() => {
+      errorMessage.value = ''
+    }, 3500)
   }
 }
 
@@ -55,14 +59,14 @@ const submit = async () => {
 </script>
 
 <template>
-  <div class="flex h-[calc(100vh-6rem)] items-center justify-center overflow-hidden bg-violet">
+  <div class="flex h-screen items-center justify-center overflow-hidden bg-violet">
     <div
-      class="flex h-3/4 w-2/3 flex-row items-center justify-center rounded-2xl bg-slate-800 shadow-xl shadow-slate-700"
+      class="mt-10 flex h-3/4 w-2/3 flex-row items-center justify-center rounded-2xl bg-slate-800 shadow-xl shadow-slate-700"
     >
       <div class="h-full w-1/2 p-4">
         <img class="h-full rounded-2xl" src="@/assets/images/AuctionCreation.png" />
       </div>
-      <div class="flex h-full w-1/2 flex-col items-center p-8">
+      <div class="flex h-full w-1/2 flex-col items-center pt-10">
         <h1 class="text-4xl">Create New Auction</h1>
         <div class="mt-8 w-2/3">
           <label class="text-lg" for="auctionTitle">Auction Title</label>
@@ -96,7 +100,11 @@ const submit = async () => {
             type="datetime-local"
             v-model="formData.dueDate"
           />
-          <button class="w-full rounded-md bg-violet px-4 py-2" @click.prevent="submit">
+          <button
+            id="submit"
+            class="w-full rounded-md bg-violet px-4 py-2 transition hover:scale-105"
+            @click.prevent="submit"
+          >
             Create Auction
           </button>
         </div>

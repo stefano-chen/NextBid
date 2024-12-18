@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <div class="justify-evenl flex flex-row items-center py-32 pl-24 pr-32">
+  <div class="relative top-20 flex flex-row items-center justify-evenly py-32 pl-24 pr-32">
     <div class="flex flex-col gap-10">
       <h1 class="text-9xl">Your Next Great Deal Starts Here!</h1>
       <RouterLink class="w-32" to="/signin">

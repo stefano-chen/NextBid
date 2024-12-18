@@ -3,6 +3,9 @@ import axios from 'axios'
 import { inject } from 'vue'
 import BioDisplay from './BioDisplay.vue'
 import AddIcon from '@/assets/icons/AddIcon.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const emit = defineEmits(['close'])
 
@@ -17,7 +20,8 @@ const signout = async () => {
     await axios.get('/api/auth/signout')
     setUser(null)
     deleteUser()
-    emit('close')
+    // emit('close')
+    router.push('/')
   } catch {
     console.log('Sign out error')
   }

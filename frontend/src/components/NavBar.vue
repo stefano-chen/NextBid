@@ -9,7 +9,7 @@ const isAuth = computed(() => (user.value ? true : false))
 </script>
 
 <template>
-  <nav class="sticky top-0 z-10 h-24 w-screen bg-slate-800 p-6">
+  <nav class="fixed top-0 z-10 h-24 w-screen bg-slate-800 p-6">
     <div class="flex flex-row items-center justify-between">
       <RouterLink to="/">
         <div class="flex w-fit flex-row items-center gap-4">

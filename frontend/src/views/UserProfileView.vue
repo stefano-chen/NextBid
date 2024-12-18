@@ -46,9 +46,11 @@ const username = computed(() => userData.value.username)
 
 const fullname = computed(() => userData.value.name + ' ' + userData.value.surname)
 
-const title = computed(() => (showMyAuctions.value ? 'My Auctions' : 'Won Auctions'))
+const title = computed(() =>
+  showMyAuctions.value ? `${userData.value.username}'s Auctions` : 'Won Auctions',
+)
 
-const btnText = computed(() => (showMyAuctions.value ? 'My Wins' : 'My Auctions'))
+const btnText = computed(() => (showMyAuctions.value ? 'Show Wins' : 'Show Auctions'))
 
 onMounted(loadUserData)
 </script>

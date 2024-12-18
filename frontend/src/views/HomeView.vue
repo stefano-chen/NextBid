@@ -23,7 +23,6 @@ onMounted(async () => {
 
 <template>
   <HeroSection />
-
   <CardGroup
     :error="loadingError"
     :loading="isLoading"
