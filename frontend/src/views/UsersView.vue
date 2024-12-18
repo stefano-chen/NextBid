@@ -2,9 +2,9 @@
 import CardGroup from '@/components/CardGroup.vue'
 import SearchIcon from '@/assets/icons/SearchIcon.vue'
 import axios from 'axios'
-import { onMounted, ref } from 'vue'
+import { onMounted, provide, ref } from 'vue'
 
-let auctions = ref([])
+let users = ref([])
 let isLoading = ref(true)
 let loadingError = ref(false)
 let searchQuery = ''
@@ -12,7 +12,7 @@ let searchQuery = ''
 const load = async (query) => {
   try {
     const response = await axios.get(`/api/users/`, { params: { q: query } })
-    auctions.value = await response.data
+    users.value = await response.data
   } catch {
     loadingError.value = true
   } finally {
@@ -28,6 +28,8 @@ const submitOnEnter = (event) => {
     load(searchQuery)
   }
 }
+
+provide('data', users)
 </script>
 
 <template>
@@ -35,8 +37,7 @@ const submitOnEnter = (event) => {
     :error="loadingError"
     :loading="isLoading"
     class="mt-8"
-    :data="auctions"
-    title="Auctions Listing"
+    title="Users Listing"
     topbtn="true"
     type="user"
   >

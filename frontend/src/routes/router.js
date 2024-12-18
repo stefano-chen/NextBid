@@ -8,6 +8,7 @@ import SignInView from '@/views/SignInView.vue'
 import UserProfileView from '@/views/UserProfileView.vue'
 import CreateAuctionView from '@/views/CreateAuctionView.vue'
 import UsersView from '@/views/UsersView.vue'
+import AuctionDetailView from '@/views/AuctionDetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -49,6 +50,11 @@ const router = createRouter({
       path: '/auction/create',
       name: 'CreateAuction',
       component: CreateAuctionView,
+    },
+    {
+      path: '/auction/:id',
+      name: 'AuctionByID',
+      component: AuctionDetailView,
     },
     {
       path: '/:pathMatch(.*)*',

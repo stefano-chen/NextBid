@@ -4,7 +4,7 @@ import CardGroup from '@/components/CardGroup.vue'
 import TrophyIcon from '@/assets/icons/TrophyIcon.vue'
 import HammerIcon from '@/assets/icons/HammerIcon.vue'
 import axios from 'axios'
-import { computed, onMounted, ref } from 'vue'
+import { computed, inject, onMounted, provide, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -26,6 +26,15 @@ const renderData = () => {
   }
   return userData.value.myAuctions
 }
+
+let dataList = computed({
+  get() {
+    return renderData()
+  },
+  set(newDataList) {
+    userData.value.myAuctions = newDataList
+  },
+})
 
 const loadUserData = async () => {
   try {
@@ -52,15 +61,23 @@ const title = computed(() =>
 
 const btnText = computed(() => (showMyAuctions.value ? 'Show Wins' : 'Show Auctions'))
 
+const { user } = inject('user')
+
+const showEdit = computed(() => {
+  return user.value._id === route.params.id
+})
+
 onMounted(loadUserData)
+
+provide('data', dataList)
 </script>
 
 <template>
   <div class="fixed top-24 h-full w-2/5 bg-glaucous">
-    <div class="flex h-full flex-col items-center">
+    <div v-if="!isLoading" class="flex h-full flex-col items-center">
       <GeneralUserIcon class="h-1/3 w-1/3" />
-      <h1 class="mb-1">{{ username }}</h1>
-      <h1 class="mb-8 text-lg">({{ fullname }})</h1>
+      <h1 class="mb-1">{{ username || 'User' }}</h1>
+      <h1 class="mb-8 text-lg">({{ fullname || 'fullname' }})</h1>
       <div
         class="h-1/6 w-1/2 resize-none overflow-y-scroll whitespace-pre-wrap break-words rounded-lg bg-slate-800/30 p-3 text-xl"
       >
@@ -83,10 +100,9 @@ onMounted(loadUserData)
       <CardGroup
         :error="loadingError"
         :loading="isLoading"
-        :data="renderData()"
         :title="title"
         topbtn="true"
-        type="auction"
+        :type="showEdit ? 'editAuction' : 'auction'"
       />
     </div>
   </div>

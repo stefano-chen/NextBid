@@ -2,7 +2,7 @@
 import CardGroup from '@/components/CardGroup.vue'
 import HeroSection from '@/components/HeroSection.vue'
 import axios from 'axios'
-import { onMounted, ref } from 'vue'
+import { onMounted, provide, ref } from 'vue'
 
 let auctions = ref([])
 let isLoading = ref(true)
@@ -19,6 +19,8 @@ onMounted(async () => {
     isLoading.value = false
   }
 })
+
+provide('data', auctions)
 </script>
 
 <template>
@@ -26,7 +28,6 @@ onMounted(async () => {
   <CardGroup
     :error="loadingError"
     :loading="isLoading"
-    :data="auctions"
     title="Recently Added"
     viewmore="true"
     type="auction"

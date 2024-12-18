@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { format } from 'date-fns'
+import DeleteIcon from '@/assets/icons/DeleteIcon.vue'
 
 const maxCharTitle = 21
 const maxCharDescription = 180
@@ -13,6 +14,8 @@ if (description && description.length > maxCharDescription)
 const auctionId = props.auction._id
 const initialBid = props.auction.initialBid?.toFixed(2)
 const dueDate = format(props.auction.dueDate, 'dd-MM-yyyy HH:mm')
+
+const emit = defineEmits(['delete'])
 </script>
 
 <template>
@@ -33,5 +36,9 @@ const dueDate = format(props.auction.dueDate, 'dd-MM-yyyy HH:mm')
         >More</RouterLink
       >
     </div>
+    <DeleteIcon
+      class="absolute right-5 top-3 size-8 transition hover:scale-125 hover:cursor-pointer"
+      @click.prevent.stop="emit('delete')"
+    />
   </div>
 </template>

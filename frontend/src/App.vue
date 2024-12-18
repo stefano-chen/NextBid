@@ -5,5 +5,5 @@ import { RouterView } from 'vue-router'
 
 <template>
   <NavBar v-if="!$route.meta.hideNavbar" />
-  <RouterView />
+  <RouterView :key="$route.fullPath" />
 </template>

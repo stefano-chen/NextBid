@@ -2,7 +2,7 @@
 import CardGroup from '@/components/CardGroup.vue'
 import SearchIcon from '@/assets/icons/SearchIcon.vue'
 import axios from 'axios'
-import { onMounted, ref } from 'vue'
+import { onMounted, provide, ref } from 'vue'
 
 let auctions = ref([])
 let isLoading = ref(true)
@@ -28,6 +28,8 @@ const submitOnEnter = (event) => {
     load(searchQuery)
   }
 }
+
+provide('data', auctions)
 </script>
 
 <template>
@@ -35,7 +37,6 @@ const submitOnEnter = (event) => {
     :error="loadingError"
     :loading="isLoading"
     class="mt-8"
-    :data="auctions"
     title="Auctions Listing"
     topbtn="true"
     type="auction"
