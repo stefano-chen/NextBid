@@ -1,4 +1,4 @@
-const { isValidObjectId} = require("mongoose");
+const { isValidObjectId } = require("mongoose");
 
 const Auction = require("../../database/Models/auctionModel");
 
@@ -9,21 +9,22 @@ const auctionOwnerPipeline = require("../../database/Pipelines/auctionOwnerPipel
 
 // returns the auction detail, identified by an id
 const getAuction = async (req, res) => {
-    try {
-        const id = req.params.id;
+  try {
+    const id = req.params.id;
 
-        if (!isValidObjectId(id)) throw new Error("Invalid ID. Please check the ID and try again.");
+    if (!isValidObjectId(id))
+      throw new Error("Invalid ID. Please check the ID and try again.");
 
-        let auction = await Auction.findById(id);
-        if (!auction) throw new Error("Auction not found");
+    let auction = await Auction.findById(id);
+    if (!auction) throw new Error("Auction not found");
 
-        // apply a join between the auctions and the users collections
-        [auction] = await Auction.aggregate(auctionOwnerPipeline(id));
+    // apply a join between the auctions and the users collections
+    [auction] = await Auction.aggregate(auctionOwnerPipeline(id));
 
-        res.status(200).send(auction);
-    } catch (error) {
-        res.status(404).send({ error: error.message });
-    }
+    res.status(200).send(auction);
+  } catch (error) {
+    res.status(404).send({ error: error.message });
+  }
 };
 
 module.exports = getAuction;

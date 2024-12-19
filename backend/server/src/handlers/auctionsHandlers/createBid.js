@@ -41,7 +41,7 @@ const createBid = async (req, res) => {
       throw new Error(
         `The amount entered is too low.\nPlease enter at least ${
           highestBid + minBidInc
-        }.`
+        }`
       );
 
     // Makes the bid using the uid inside the session,

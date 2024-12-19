@@ -1,6 +1,6 @@
 const errorMsg =
-  "You must be logged in to access this resource.\n" +
-  "Please log in or create an account.";
+  "You must be signed in to access this resource.\n" +
+  "Please sign in or create an account.";
 
 // Checks if the user is authenticated
 // by checking the existence of uid

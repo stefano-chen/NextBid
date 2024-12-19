@@ -20,7 +20,7 @@ const signout = async () => {
     await axios.get('/api/auth/signout')
     setUser(null)
     deleteUser()
-    // emit('close')
+    emit('close')
     router.push('/')
   } catch {
     console.log('Sign out error')

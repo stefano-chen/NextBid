@@ -6,8 +6,11 @@
   html {
     font-family: 'Roboto', system-ui, sans-serif;
     scrollbar-width: none;
-    scrollbar-color: #e5e7eb #334155;
     @apply scroll-smooth;
+  }
+
+  div::-webkit-scrollbar {
+    display: none;
   }
 
   body {
@@ -19,6 +22,16 @@
   }
   p {
     @apply text-xl;
+  }
+
+  th,
+  tr,
+  td {
+    @apply h-6 px-4 py-1 text-left;
+  }
+
+  th {
+    @apply border-b;
   }
 
   .no-scroll {
