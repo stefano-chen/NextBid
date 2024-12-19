@@ -5,6 +5,10 @@
 const express = require("express");
 const session = require("express-session");
 
+// Module to manage Single Page Application History
+// more info here (https://router.vuejs.org/guide/essentials/history-mode.html#HTML5-Mode)
+const history = require("connect-history-api-fallback");
+
 // A Session Store that uses MongoDB to store the sessions data
 const MongoDBStore = require("connect-mongodb-session")(session);
 
@@ -64,8 +68,10 @@ app.use(
 
 app.use(express.json());
 
+app.use(history());
+
 // Serve the website
-app.use("/", express.static(`${__dirname}/public/`));
+app.use("/", express.static(`${__dirname}/public`));
 
 // Endpoint to manage authentication
 app.use("/api/auth", authRoutes);
