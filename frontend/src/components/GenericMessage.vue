@@ -12,7 +12,7 @@ const getColor = () => {
 
 <template>
   <div class="flex w-full justify-center">
-    <div :class="[getColor(), 'rounded-md', 'px-5', 'py-3']">
+    <div :class="[getColor(), 'rounded-md', 'px-5', 'py-3', 'whitespace-pre-wrap', 'break-words']">
       <slot></slot>
     </div>
   </div>
