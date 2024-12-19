@@ -26,7 +26,7 @@ const dueDate = format(props.auction.dueDate, 'dd-MM-yyyy HH:mm')
     <hr class="mt-5" />
     <div class="mt-2 flex flex-row items-center justify-between">
       <p class="text-sm">
-        Initial Bid: {{ initialBid }}&#8364; <br />
+        Starting bid: {{ initialBid }}&#8364; <br />
         Ends: {{ dueDate }}
       </p>
       <RouterLink :to="`/auction/${auctionId}`" class="rounded-md bg-green-700 px-2 py-1"
