@@ -1,0 +1,44 @@
+name: chen
+
+services:
+  server:
+    container_name: chen-server
+    build:
+      context: ./server
+    environment:
+      NODE_ENV: production # npm will not install dev-Dependencies
+      MONGO_URI: "mongodb://database:27017"
+      PORT: 3000
+      SESSION_SECRET: "This is my SESSION_SECRET"
+    #    command: ["npm", "run", "dev"]    # this line is use for development inside the container (nodemon restarting the server after changes) MUST BE DELETED FOR PRODUCTION!!!
+    #    volumes:                          # this line is use for development inside the container MUST BE DELETED FOR PRODUCTION!!!
+    #      - ./server:/usr/src/app         # a direct mapping of the src code, it's not a copy!!!, (modifying the files on the host -> modifying the file inside the container)
+    ports:
+      - "3000:3000"
+    networks:
+      - chen-net
+    depends_on:
+      - database
+
+  database:
+    container_name: chen-database
+    image: mongo:latest
+    volumes:
+      - chen-data:/data/db # persist the database data, more info at https://hub.docker.com/_/mongo (Where to Store Data)
+      # - ./database/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro   # map the script to initialize mongodb with read-only permission
+      # more info at https://hub.docker.com/_/mongo (Initializing a fresh instance)
+    ports:
+      - "27017:27017"
+    networks:
+      - chen-net
+
+networks:
+  chen-net:
+
+volumes:
+  chen-data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./database/data

@@ -65,7 +65,7 @@ app.use(
 app.use(express.json());
 
 // Serve the website
-app.use("/", express.static(`${__dirname}/../dist/`));
+app.use("/", express.static(`${__dirname}/public/`));
 
 // Endpoint to manage authentication
 app.use("/api/auth", authRoutes);
