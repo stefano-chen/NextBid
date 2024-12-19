@@ -9,8 +9,6 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-// const showAuctions = ref(route.query.show)
-// console.log(showAuctions)
 let userData = ref({})
 let isLoading = ref(true)
 let loadingError = ref(false)

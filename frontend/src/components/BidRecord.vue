@@ -3,7 +3,6 @@ import { format } from 'date-fns'
 const props = defineProps(['bid'])
 
 const date = format(props.bid.createdAt, 'dd-MM-yyyy HH:mm:ss')
-// console.log(props.bid?.createdAt)
 const username = `[${date}] ${props.bid.user.username}`
 const amount = props.bid.amount.toFixed(2)
 </script>

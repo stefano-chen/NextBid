@@ -69,14 +69,10 @@ const submit = async () => {
   try {
     if (checkFields()) {
       loarding.value = true
-      await new Promise((r) => setTimeout(r, 2000)) // Delete for production
       const response = await axios.post(form.value.endpoint, userData)
       const data = await response.data
-      // console.log('userdata:', data) //Delete
       setUser(data)
       saveUser()
-      // console.log(user.value.username) // Delete for production
-      // localStorage.setItem('NextBid-user', JSON.stringify(data))
       router.push('/')
     }
   } catch (error) {
@@ -165,7 +161,6 @@ onUnmounted(() => clearTimeout(timeoutID))
   transition: opacity 1s ease-in;
 }
 .v-leave-active {
-  /* transition: opacity 0s cubic-bezier(0,1,1,1); */
   opacity: 0;
 }
 

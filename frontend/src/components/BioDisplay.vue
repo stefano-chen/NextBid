@@ -7,16 +7,6 @@ import axios from 'axios'
 let editable = ref(false)
 const { user, setBio, saveUser } = inject('user')
 
-// const originalBio = computed({
-//   get() {
-//     return user.value.bio
-//   },
-
-//   set(newBio) {
-//     setBio(newBio)
-//   },
-// })
-
 let originalBio = user.value.bio
 
 let newBio = originalBio

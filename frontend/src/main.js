@@ -43,11 +43,6 @@ const init = async () => {
   }
 }
 
-// const userData = localStorage.getItem('NextBid-user')
-// if (userData) {
-//   setUser(JSON.parse(userData))
-// }
-
 init()
   .then(() => {
     app.provide('user', { user, setUser, setBio, saveUser, deleteUser })
