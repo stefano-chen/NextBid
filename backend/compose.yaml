@@ -7,7 +7,7 @@ services:
       context: ./server
     environment:
       NODE_ENV: production # npm will not install dev-Dependencies
-      MONGO_URI: "mongodb://database:27017"
+      MONGO_URI: "mongodb://database:27017/NextBid"
       PORT: 3000
       SESSION_SECRET: "This is my SESSION_SECRET"
     #    command: ["npm", "run", "dev"]    # this line is use for development inside the container (nodemon restarting the server after changes) MUST BE DELETED FOR PRODUCTION!!!
