@@ -49,13 +49,13 @@ To run locally follow this steps:
 
 4. Wait util you see this message on the console
 
-   ```bash
+   ```
    chen-server    | HTTP server running on port 3000
    ```
 
 5. Now open a browser and type the following url in the address bar
 
-   ```http
+   ```
    http://localhost:3000
    ```
 # Assignment
