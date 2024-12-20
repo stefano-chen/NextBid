@@ -1,6 +1,7 @@
 // Importing the environment variable from a .env file
 // The .env file is a local file not tracker by git/github
-// require("dotenv").config({ path: `${__dirname}/../.env` }); // Comment this for production
+if (process.env.NODE_ENV !== "production")
+  require("dotenv").config({ path: `${__dirname}/../.env` }); // Comment this for production
 
 const express = require("express");
 const session = require("express-session");

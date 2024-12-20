@@ -7,6 +7,8 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const route = useRoute()
 
+const props = defineProps(['expired'])
+
 const auctionID = route.params.id
 
 let intervalID
@@ -32,7 +34,7 @@ const fetchBids = async () => {
 onMounted(() => {
   fetchBids()
     .then((status) => {
-      if (status === 200) {
+      if (status === 200 && !props.expired) {
         intervalID = setInterval(fetchBids, fetchInterval)
       }
     })

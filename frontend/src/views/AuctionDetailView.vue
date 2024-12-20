@@ -9,6 +9,7 @@ import { format, isPast } from 'date-fns'
 const route = useRoute()
 let auction = ref({})
 let errorMessage = ref('')
+let isLoading = ref(true)
 
 let timeoutID
 const MSG_DURATION = 3500
@@ -62,6 +63,8 @@ const loadAuction = async () => {
     auction.value = response.data
   } catch {
     errorMessage.value = 'Cannot Fetch Data'
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -93,7 +96,7 @@ onUnmounted(() => clearTimeout(timeoutID))
       </div>
       <label class="self-start opacity-80"
         >Status:
-        <span :class="isExpired ? 'text-red-500' : 'text-green-500'"
+        <span v-if="!isLoading" :class="isExpired ? 'text-red-500' : 'text-green-500'"
           >{{ isExpired ? 'Ended' : 'In Progress' }}
         </span></label
       >
@@ -122,7 +125,7 @@ onUnmounted(() => clearTimeout(timeoutID))
         }}</GenericMessage>
       </Transition>
     </div>
-    <BidHistory />
+    <BidHistory v-if="!isLoading" :expired="isExpired" />
   </div>
 </template>
 
