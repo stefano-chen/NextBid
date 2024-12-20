@@ -47,7 +47,7 @@ To run locally follow this steps:
    docker compose up --build
    ```
 
-4. Wait util you see this message on the console
+4. Wait until you see this message on the console
 
    ```
    chen-server    | HTTP server running on port 3000
