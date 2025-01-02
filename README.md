@@ -1,7 +1,7 @@
 # Introduction
 
 Hi, I'm Stefano Chen a master's degree student in Computer Engineering at the University of Trieste in Italy.\
-This is a exam project for the Web Development 2024-2025 course.\
+This is an exam project for the Web Development 2024-2025 course.\
 The technologies used in this project are:
 
 - [NodeJS](https://nodejs.org/en/about)
