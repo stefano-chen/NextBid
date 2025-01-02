@@ -60,6 +60,10 @@ To run locally follow this steps:
    http://localhost:3000
    ```
 
+### Note
+In the current release (v1.0.3), the web app is not fully optimized for all screen sizes.\
+We are actively working to improve responsiveness in an upcoming update. Thank you for your patience!
+
 # Assignment
 
 We want to create a web application that acts as an auction site.\
