@@ -8,6 +8,7 @@ The technologies used in this project are:
 - [MongoDB](https://www.mongodb.com/)
 - [ExpressJS](https://expressjs.com/)
 - [VueJS](https://vuejs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 - [Docker](https://www.docker.com/)
 
 # How to run
@@ -58,6 +59,7 @@ To run locally follow this steps:
    ```http
    http://localhost:3000
    ```
+
 # Assignment
 
 We want to create a web application that acts as an auction site.\

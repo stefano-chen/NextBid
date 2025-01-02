@@ -2,8 +2,8 @@
 import { RouterLink } from 'vue-router'
 import { format } from 'date-fns'
 
-const maxCharTitle = 21
-const maxCharDescription = 180
+const maxCharTitle = 20
+const maxCharDescription = 100
 const props = defineProps(['auction', 'commands'])
 let title = props.auction.title
 if (title && title.length > maxCharTitle) title = title.slice(0, maxCharTitle - 1) + '...'

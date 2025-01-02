@@ -9,7 +9,8 @@
     @apply scroll-smooth;
   }
 
-  div::-webkit-scrollbar {
+  /* Hide Chrome scrollbar*/
+  ::-webkit-scrollbar {
     display: none;
   }
 
