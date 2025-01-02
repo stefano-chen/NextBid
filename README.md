@@ -20,11 +20,11 @@ The unzipped folder has the following structure:
 ```
 .
 ├───/backend
-│   ├───/database
-│   │   └───/data    //This folder will be used to store MongoDB`s data persistently.
-│   ├───/server
-│   │
-│   └───compose.yaml
+│    ├───/database
+│    │   └───/data    //This folder will be used to store MongoDB`s data persistently.
+│    ├───/server
+│    │
+│    └───compose.yaml
 │
 ├───/frontend
 │
